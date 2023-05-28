@@ -52,8 +52,7 @@ git push -u origin master
 ```c
 git add .
 git commit -m "origin version"
-git push -u origin master
+git push origin master
 ```
-
 
 
