@@ -1,5 +1,7 @@
 
 
+# windows:
+
 [(26条消息) windows系统下上传代码到github的较详细教程_windows上传github代码_叶长晴的博客-CSDN博客](https://blog.csdn.net/weixin_44017406/article/details/129906172)
 
 [(26条消息) windows上传本地项目到github_github 本地传脚本 windows_cool同学的博客-CSDN博客](https://blog.csdn.net/qq_40466537/article/details/128170063)
@@ -55,5 +57,24 @@ git push -u origin master
 git add .
 git commit -m "origin version"
 git push origin master
+```
+
+# linux:
+
+[(27条消息) linux下将本地代码上传至github_linux上传代码到github_vincy's的博客-CSDN博客](https://blog.csdn.net/weixin_42787605/article/details/125177384)
+
+1. 新建仓库，随后克隆
+
+```c
+git clone XXX.git
+```
+
+2. 修改克隆下来的文件夹
+3. 上传
+
+```c
+git add .
+git commit -m "备注"
+git push
 ```
 
