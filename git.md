@@ -78,3 +78,13 @@ git commit -m "备注"
 git push
 ```
 
+# github上传上去的文件夹有箭头，打不开：
+
+```bash
+1. 删除文件夹里面的.git文件
+2. git rm --cached filename
+3. git add filename
+4. git commit -m ""
+5. git push origin branch_name
+```
+
