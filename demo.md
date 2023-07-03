@@ -215,3 +215,11 @@ int sprintf(char *out, const char *fmt, ...)
 
 
 
+[(28条消息) Typora添加数学公式_typora插入公式_醉一心的博客-CSDN博客](https://blog.csdn.net/qq_37402392/article/details/121348504)
+
+添加数学公式
+
+插入希腊字母：
+
+![image-20230608212850651](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230608212850651.png)
+
