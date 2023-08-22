@@ -859,3 +859,21 @@
 注：共源极的输入电阻是无穷大的，输入阻抗与电阻的不同是要考虑虚部，**在高频的情况下输入阻抗并不是无穷大，随着频率的增大输入阻抗不断减小**。
 
 ### 6.3 源跟随器
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822203000681.png" alt="image-20230822203000681" style="zoom:50%;" />
+
+1. 传输函数包含一个在左平面的零点：高频时由C~GS~传导的信号与本征晶体管产生的信号以相同的极性相加。
+2. <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822203146742.png" alt="image-20230822203146742" style="zoom:50%;" />
+3. 若源跟随器前一级输出阻抗很大，则源跟随器的输出阻抗表现出电感特性（随频率增加）。
+
+### 6.4 共栅极
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822203853626.png" alt="image-20230822203853626" style="zoom:50%;" />
+
+1. 因为输入和输出的两个结点是“独立”的，没有密勒电容耦合，所以共栅级可以达到宽带。
+2. <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822204059280.png" alt="image-20230822204059280" style="zoom:50%;" />
+
+3. 如果与栅串联的是大阻抗，则降低了极点频率。
+
+## 第7章 噪声
+
