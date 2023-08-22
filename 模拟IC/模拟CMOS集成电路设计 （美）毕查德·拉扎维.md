@@ -4,7 +4,7 @@
 
 ### 2.1 MOS晶体管的结构
 
-![image-20230728152238973](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230728152238973.png)
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230728152238973.png" alt="image-20230728152238973" style="zoom: 50%;" />
 
 ​		栅沿源漏通道的横向尺寸叫**栅长L**，与之垂直方向的栅的尺寸叫做**栅宽W**，L<sub>eff</sub>为**有效栅长**。
 
@@ -44,7 +44,9 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729103313003.png" alt="image-20230729103313003" style="zoom:33%;" />
 
-​		其中V<sub>GS</sub>-V<sub>TH</sub>称为**“过驱动电压”**。
+​		其中V<sub>GS</sub>-V<sub>TH</sub>称为**“过驱动电压”**
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230807230002387.png" alt="image-20230807230002387" style="zoom:50%;" />
 
 ​		当**V<sub>DS</sub> << 2(V<sub>GS</sub>-V<sub>TH</sub>)**，可得
 
@@ -62,21 +64,31 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729144551892.png" alt="image-20230729144551892" style="zoom:50%;" />
 
-- 夹断区
-
 ​		如果**V<sub>DS</sub> 略大于V<sub>GS</sub>-V<sub>TH</sub>**，则反型层将在x ≤ L处终止，称为沟道被夹断。
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729144841457.png" alt="image-20230729144841457" style="zoom: 50%;" />
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729144948228.png" alt="image-20230729144948228" style="zoom:50%;" />
 
-> 总结：
+> ==总结：==
+>
+> 1，对于MOS管，由于是对称结构，故源极和漏极可以互换；对于NMOS来说谁的电压低谁就是源极，对于PMOS来说谁的电压高谁就是源极。
+>
+> 2，三个工作区的条件：
 >
 > <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729145809520.png" alt="image-20230729145809520" style="zoom: 33%;" />
 >
-> V<sub>GS</sub> > V<sub>TH</sub>时：V<sub>DS </sub> > V<sub>GS</sub>-V<sub>TH</sub>对应饱和区；V<sub>DS </sub> < V<sub>GS</sub>-V<sub>TH</sub>对应线性区；
+> V<sub>GS</sub> < V<sub>TH</sub>时：工作于截止区，I<sub>D</sub> = 0；
+>
+> V<sub>GS</sub> > V<sub>TH</sub>时：V<sub>DS </sub> < V<sub>GS</sub>-V<sub>TH</sub>对应线性区，I<sub>D</sub> = <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230801170125780.png" alt="image-20230801170125780" style="zoom: 67%;" /> ；
+>
+> ​						V<sub>DS </sub> > V<sub>GS</sub>-V<sub>TH</sub>对应饱和区，I<sub>D</sub> = <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230801084632573.png" alt="image-20230801084632573" style="zoom: 50%;" />；
 >
 > 工作在饱和区所需的最小的V<sub>DS</sub>也称为V<sub>D,sat</sub>，V<sub>D,sat</sub> = V<sub>GS</sub>-V<sub>TH</sub>
+>
+> 3，对于NMOS：固定V<sub>DS</sub>的值，随着V<sub>G</sub>的增大，管子先进入饱和区，随后进入线性区；
+>
+> ​							 固定V<sub>G</sub>的值，随着V<sub>DS</sub>的增大，管子先进入线性区，随后进入饱和区；
 
 - MOSFET的跨导
 
@@ -86,15 +98,21 @@
 
 ​		g<sub>m</sub>单位是1/Ω 或西门子（S）。
 
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230809194440094.png" alt="image-20230809194440094" style="zoom:50%;" />
+
 ​		饱和区的g<sub>m</sub>值等于深三极管区R<sub>on</sub>的倒数。
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729152440090.png" alt="image-20230729152440090" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230809194402906.png" alt="image-20230809194402906" style="zoom: 50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230809194503256.png" alt="image-20230809194503256" style="zoom:50%;" />
 
 ### 2.3 二级效应
 
 - 体效应：MOS管的阈值电压将随其源极和衬底之间电位的不同而发生变化
 
-​		随着V<sub>B</sub>的下降，Q<sub>d</sub>增加，V<sub>TH</sub>也增加。
+​		**随着V<sub>B</sub>的下降，Q<sub>d</sub>增加，V<sub>TH</sub>也增加**。
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729155436343.png" alt="image-20230729155436343" style="zoom:50%;" />
 
@@ -108,6 +126,8 @@
 
 例如：
 
+​		图中电路V<sub>out</sub> = V<sub>in</sub> - V<sub>GS</sub>
+
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729161245558.png" alt="image-20230729161245558" style="zoom: 33%;" />
 
 > 体效应的存在会导致阈值电压的改变
@@ -117,6 +137,8 @@
 ​		**此效应发生在饱和区**，沟道长度L`是V<sub>DS</sub>的函数（从式2.13可得）。
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729161328814.png" alt="image-20230729161328814" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230809200907639.png" alt="image-20230809200907639" style="zoom:50%;" />
 
 > 沟道长度调制的存在导致I<sub>DS</sub>/V<sub>DS</sub>特性曲线在饱和区出现非零斜率，使D和S之间的电流源非理想。
 
@@ -130,13 +152,15 @@
 
 ### 2.4 小信号模型
 
+​		小信号模型就是MOS管的线性模型。
+
 #### 2.4.1 MOS器件版图
 
-![image-20230730091400780](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730091400780.png)
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730091400780.png" alt="image-20230730091400780" style="zoom:50%;" />
 
 例如：
 
-![image-20230730091509154](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730091509154.png)
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730091509154.png" alt="image-20230730091509154" style="zoom:50%;" />
 
 #### 2.4.2 MOS器件电容
 
@@ -150,7 +174,7 @@
 
 ​		（1）栅和沟道之间的氧化层电容C<sub>1</sub> = WLC<sub>OX</sub>
 
-​		（2）衬底和沟道之间的耗尽层电容C<sub>2</sub> = <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730092311801.png" alt="image-20230730092311801" style="zoom: 33%;" />
+​		（2）衬底和沟道之间的耗尽层电容C<sub>2</sub> = <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730092311801.png" alt="image-20230730092311801" style="zoom: 50%;" />
 
 ​		（3）多晶硅栅与源和漏的覆盖而产生的电容C<sub>3</sub>和C<sub>4</sub>。每单位宽度的覆盖电容用C<sub>OV</sub>表示，单位F/m。栅源和栅漏覆盖电容等于C<sub>OV</sub>W。
 
@@ -168,13 +192,669 @@
 2. 在两个端子之间产生一个电压增量而其他端子的电压保持不变
 3. 测量所有端子电流的变化
 
-<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730110228509.png" alt="image-20230730110228509" style="zoom: 33%;" />
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730110228509.png" alt="image-20230730110228509" style="zoom: 50%;" />
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730111126083.png" alt="image-20230730111126083" style="zoom:33%;" />
 
 ### 2.5 SPICE模型
 
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230801085344954.png" alt="image-20230801085344954" style="zoom:50%;" />
+
 ​		一级MOS SPICE模型参数定义：
 
-![image-20230730111906638](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730111906638.png)
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730111906638.png" alt="image-20230730111906638" style="zoom: 50%;" />
+
+## 第3章 单极放大器
+
+​		本章目的：研究CMOS单极放大器的低频特性
+
+> ​	三步曲：（1）DC偏置（2）小信号增益（3）输入输出电阻
+
+### 3.3 共源极
+
+#### 3.3.1 采用电阻作负载的共源极
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811093944173.png" alt="image-20230811093944173" style="zoom: 50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811140633928.png" alt="image-20230811140633928" style="zoom: 33%;" />
+
+​		M1将输入电压的变化△V<sub>in</sub>转换为漏极电流的变化g<sub>m</sub>△V<sub>in</sub>，进一步转换为输出电压的变化 -g<sub>m</sub>R<sub>D</sub>△V<sub>in</sub>。
+
+​		为了使电压增益达到最大，我们必须使（小信号）负载阻抗最大。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811142114517.png" alt="image-20230811142114517" style="zoom:50%;" />
+
+​		随着输入电压的不断增大，MOS管先进入饱和区，再进入线性区；输出的漏极电流I<sub>D</sub>不断增大，而跨导在饱和区时不断线性增大至最大值<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811142531443.png" alt="image-20230811142531443" style="zoom:25%;" />，随后进入线性区后开始减小<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811142601530.png" alt="image-20230811142601530" style="zoom:25%;" />，即在线性区随着输入电压的增大管子对于电流的控制能力是越来越弱的。
+
+#### 3.3.2 采用二极管连接型器件作负载的共源极
+
+​		将晶体管的栅极和漏极短接，得到的器件称为“二极管连接型器件”。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811095737966.png" alt="image-20230811095737966" style="zoom:50%;" />
+
+​		**该晶体管总是工作在饱和区**。（注意NMOS的衬底连接方式，直接接地或接正电压（考虑体效应））
+
+
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812084234506.png" alt="image-20230812084234506" style="zoom:50%;" />
+
+​		随着I<sub>1</sub>突变为0，V<sub>out</sub>首先提升至V<sub>DD</sub> - V<sub>TH2</sub>（此段的斜率是由于电容的存在），随后缓慢的提升至V<sub>DD</sub>（由于阈值电压的作用）。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812085522672.png" alt="image-20230812085522672" style="zoom:50%;" />
+
+- **大信号分析：**利用电流电压关系
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812092354546.png" alt="image-20230812092354546" style="zoom:50%;" />
+
+​		两边对V<sub>in</sub>微分得小信号增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812092513088.png" alt="image-20230812092513088" style="zoom:50%;" />，其中η = g<sub>mb2</sub>/g<sub>m2</sub>（![image-20230812090547722](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812090547722.png)为跨导，![image-20230812090619952](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812090619952.png)为体跨导)
+
+- **二极管连接型器件作负载的共源极输入输出关系：**
+
+​                                                                            <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812085433755.png" alt="image-20230812085433755" style="zoom:50%;" />
+
+- **小信号分析：**利用小信号等效模型
+
+​		先分析M<sub>2</sub>管：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812093056101.png" alt="image-20230812093056101" style="zoom:50%;" />
+
+​		得出结论：二极管连接型器件等效为1/g<sub>m</sub>的电阻（不考虑体效应）（1/g<sub>m</sub>一般为几十kΩ，r<sub>o</sub>一般小于1kΩ，故两者并联时r<sub>o</sub>可忽略）
+
+​		随后分析两管：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812092828254.png" alt="image-20230812092828254" style="zoom:50%;" />
+
+- 小信号增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812085759897.png" alt="image-20230812085759897" style="zoom:50%;" />，其中η = g<sub>mb2</sub>/g<sub>m2</sub>（![image-20230812090547722](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812090547722.png)为跨导，![image-20230812090619952](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812090619952.png)为体跨导)
+
+- 输入输出电阻：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812100617232.png" alt="image-20230812100617232" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812100654009.png" alt="image-20230812100654009" style="zoom:50%;" />
+
+​		**两个NMOS连接时，电路的增益和输出电阻大小会受到体效应的影响，而当两个不同类型的管子连接时（PMOS的衬底连接V<sub>DD</sub>）不会受到体效应的影响。**
+
+#### 3.3.3 采用电流源作负载的共源极
+
+​		单级需要很大增益的时候，可以增大共源极的负载电阻，但是对于电阻或者二极管连接的负载而言，增大阻值会消耗直流压降，从而限制输出电压摆幅。可以使用电流源替代负载。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812103802914.png" alt="image-20230812103802914" style="zoom:50%;" />
+
+注1：M<sub>1</sub>和M<sub>2</sub>的类型不同，如果两者是相同类型的管子，会受到体效应的影响。
+
+注2：M<sub>2</sub>的栅极输入为直流电压V<sub>B</sub>，源极输入为直流电压V<sub>DD</sub>，对于小信号来说均为“地”，故M<sub>2</sub>小信号等效模型为一个电阻（v<sub>gs</sub> = 0，压控电流源为0）
+
+​		两个管子都是电流源，当两个管子饱和区的工作电流大小不同的时候，整体电路由电流小的管子决定（电流小的管子工作于饱和区的时候，由于两者的电流需要相等，故另一个管子工作于线性区）；电路的输入偏置点不稳定，较难确定下来；
+
+#### 总结：
+
+##### 分析方法：三部曲
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230813163732167.png" alt="image-20230813163732167" style="zoom:50%;" />
+
+##### 输出负载总结：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230813163926872.png" alt="image-20230813163926872" style="zoom: 33%;" />
+
+##### 输出电压与电流的关系图：（大信号直流偏置点以及小信号波动）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230813210333876.png" alt="image-20230813210333876" style="zoom: 33%;" />
+
+结论：相同的V<sub>in</sub>在负载引起的电流波动，二极管连接型器件波动最小，电流源负载波动最大。
+
+#### 3.3.4 有源负载的共源极
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230813172214375.png" alt="image-20230813172214375" style="zoom:50%;" />
+
+电路增益：                                                           <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230813172240308.png" alt="image-20230813172240308" style="zoom: 67%;" />
+
+​		此电路增大了增益，还可以降低噪声，缺点偏置点太容易波动。
+
+#### 3.3.6 带源极负反馈的共源极
+
+​		前面讨论的几种共源放大电路存在一个共同的问题：增益非线性（跨导g<sub>m</sub>都是关于输入电压V<sub>gs</sub>的函数），为了改善（“软化”器件的非线性）可以作如下改进：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230813174034233.png" alt="image-20230813174034233" style="zoom:50%;" />
+
+​		先忽略体效应和沟道调制效应进行分析，将R<sub>s</sub>和M<sub>1</sub>看作整体，计算可得其增益为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230813174133931.png" alt="image-20230813174133931" style="zoom: 50%;" />
+
+​		电路整体小信号电压增益为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230813174230701.png" alt="image-20230813174230701" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230813174251000.png" alt="image-20230813174251000" style="zoom:50%;" />
+
+​		当R<sub>s</sub>足够大时，G<sub>m</sub> ≈ 1/R<sub>s</sub>，A<sub>v</sub> = R<sub>D</sub>/R<sub>s</sub>，软化了非线性，但增益变小。
+
+- **输出电阻：**
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814112851912.png" alt="image-20230814112851912" style="zoom:50%;" />
+
+
+
+### 3.4 源跟随器
+
+> 共源极放大器的缺点：输出电阻太大，不能驱动很小的电阻
+>
+> 理想源跟随器要求：输入电阻无穷大，增益为1，输出电阻为0。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814114601206.png" alt="image-20230814114601206" style="zoom:50%;" />
+
+​		缺点：电阻R<sub>s</sub>会导致管子的电流I<sub>D</sub>变化（随着输入电压的增大，输出电压也增大，欧姆定律计算可得电流不断增大），会导致非线性严重。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814114645758.png" alt="image-20230814114645758" style="zoom:50%;" />
+
+- 根据小信号模型计算可得：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814114801620.png" alt="image-20230814114801620" style="zoom: 33%;" />，小于1。
+
+​		为了解决电流变化的问题，选择使用电流源替换电阻R<sub>S</sub>。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814115708089.png" alt="image-20230814115708089" style="zoom: 33%;" />
+
+​		由于M<sub>2</sub>的沟道长度调制效应，V<sub>out</sub>变化的时候会导致管子电流发生变化，从而导致V<sub>GS</sub>发生变化，输入输出非线性。
+
+​		增益为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814121121208.png" alt="image-20230814121121208" style="zoom:33%;" />，即R<sub>s</sub> = ∞。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814121424329.png" alt="image-20230814121424329" style="zoom: 50%;" />
+
+- 根据小信号模型计算可得输出电阻为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814121607387.png" alt="image-20230814121607387" style="zoom: 33%;" />
+
+### 3.5 共栅极
+
+> 最大优点：小输入电阻，输入信号可以是电流
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814134842944.png" alt="image-20230814134842944" style="zoom: 33%;" />
+
+注：
+
+1. 共栅极，即栅极接地，图中的V<sub>b</sub>是直流电压，对于小信号来说等效于地。
+2. （a）中的直流偏置由V<sub>B</sub>和V<sub>in</sub>共同决定（V<sub>GS</sub> = V<sub>B</sub> - V<sub>in</sub>）；（b）中的直流偏置由电流源 I<sub>1</sub> 决定（电流确定，管子会根据输入电压V<sub>B</sub>的变化自适应产生源极电压V<sub>s</sub>），再通过电容将输入V<sub>in</sub>耦合进电路。
+
+- 共栅极的输入输出关系如下：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814143057059.png" alt="image-20230814143057059" style="zoom:33%;" />
+
+> 和共源极不同，共栅极的输出电压随输入电压的增大而增大。		
+
+- 计算电压增益：                                                    <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814144206705.png" alt="image-20230814144206705" style="zoom:33%;" />
+
+得到结果：                         <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814144306728.png" alt="image-20230814144306728" style="zoom: 33%;" />
+
+- 计算输入电阻：                              <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814144414315.png" alt="image-20230814144414315" style="zoom:33%;" />
+
+**得到共栅极输入电阻结果**：                        <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814144624356.png" alt="image-20230814144624356" style="zoom:33%;" />
+
+- 计算输出电阻：                                 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814150734979.png" alt="image-20230814150734979" style="zoom:33%;" />
+
+得到输出电阻：              <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814150824375.png" alt="image-20230814150824375" style="zoom:33%;" />
+
+### 3.6 共源共栅级
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814151534106.png" alt="image-20230814151534106" style="zoom:50%;" />
+
+- 输入输出关系：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814194439577.png" alt="image-20230814194439577" style="zoom:33%;" />  输出阻抗：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814194539483.png" alt="image-20230814194539483" style="zoom: 50%;" />
+
+注：求输出阻抗时，M<sub>1</sub>的输入V<sub>in</sub>对于小信号来说等效于地，故M<sub>1</sub>小信号等效于电阻r<sub>o1</sub>（此时的输出电阻与带源极负反馈的共源极电路相同）
+
+求得输出阻抗为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814194944773.png" alt="image-20230814194944773" style="zoom: 25%;" />，
+
+![image-20230814195840934](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814195840934.png)
+
+​		结论：共源共栅电路的输出阻抗等于M<sub>2</sub>管（即共栅管）的本征增益乘以共源管的等效电阻；可以以此类推增加共栅管的数量进行级联增大输出电阻的值，最终得到很大的输出电阻，使得输出电流恒定。缺点：对于输入电压的要求更高。
+
+- 小信号增益：         <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814201456623.png" alt="image-20230814201456623" style="zoom:33%;" />                    <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814201530594.png" alt="image-20230814201530594" style="zoom:33%;" />               
+
+得到增益：             <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814201644787.png" alt="image-20230814201644787" style="zoom:33%;" />
+
+- 本征增益：（输出负载阻抗无穷大时的增益）<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814201743313.png" alt="image-20230814201743313" style="zoom:33%;" />，负载为电流源，阻抗无穷大。
+
+得到本征增益：         <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814201950952.png" alt="image-20230814201950952" style="zoom:33%;" />
+
+结论：共源共栅级电路的本征增益是共源放大器的平方；**共源共栅是实现高增益的基础**。
+
+## 第4章 差动放大器
+
+​		本章目的：CMOS差动放大器的分析和设计
+
+### 4.1 差动
+
+​		差动信号定义为两个结点电位之差，且这两个结点电位相对于某一固定**电位大小相等，相位相反**。
+
+​		差动信号的好处：1，共模噪声抑制 2，共模干扰抑制 3，得到最大的输出电压摆幅
+
+​						   缺点：1，芯片面积和供电几乎双倍 2， 噪声功率增加（两边噪声的产生是没有相关性的，不能完全抵消）
+
+![image-20230815103701540](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230815103701540.png)                得到共模电压：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230815103427433.png" alt="image-20230815103427433" style="zoom:33%;" />，实际应用时希望共模电平固定。
+
+​		得到差模信号：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230815103823389.png" alt="image-20230815103823389" style="zoom:33%;" />	
+
+注：两信号相减后得到差模信号，**共模信号被减去，但不代表共模信号不存在**，且对电路工作点至关重要。
+
+### 4.2 分析
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230815134138091.png" alt="image-20230815134138091" style="zoom:33%;" />
+
+- 差模部分输入输出特性：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230815134338782.png" alt="image-20230815134338782" style="zoom:33%;" />
+
+- 共模部分输入输出特性：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230815141435420.png" alt="image-20230815141435420" style="zoom: 50%;" />
+
+​		输入共模电压V<sub>in,COM</sub>从0增大到V<sub>DD</sub>：（1）V<sub>in,CM</sub> = 0，两个管子均未导通，I<sub>D1,2</sub> = 0，V<sub>out1,2</sub> = 0，V<sub>p</sub> = 0；（2）V<sub>in,COM</sub> > V<sub>TH</sub>，两个管子导通，M<sub>3</sub>工作于线性区等效于一个电阻；（3）V<sub>in,CM</sub> ≥ V<sub>GS1</sub> + (V<sub>GS3</sub> - V<sub>TH3</sub>)，随着V<sub>in,CM</sub>继续增加，I<sub>D1,2</sub>和V<sub>out1,2</sub>趋于常数；（4）V<sub>in,CM</sub> ≤ V<sub>out1,2</sub> + V<sub>TH</sub> = V<sub>DD</sub> - R<sub>D</sub>I<sub>SS</sub>/2 + V<sub>TH</sub>，否则两个管子会工作于线性区。 
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230815143200225.png" alt="image-20230815143200225" style="zoom: 33%;" />
+
+- 大信号分析：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816074128065.png" alt="image-20230816074128065" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816074218113.png" alt="image-20230816074218113" style="zoom: 50%;" />
+
+跨导：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816074253852.png" alt="image-20230816074253852" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816074831754.png" alt="image-20230816074831754" style="zoom:50%;" />
+
+当V<sub>in,diff</sub> = 0时（即V<sub>in1</sub> = V<sub>in2</sub>，输入共模信号），跨导：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816074618285.png" alt="image-20230816074618285" style="zoom: 33%;" />
+
+此时的小信号增益为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816074734260.png" alt="image-20230816074734260" style="zoom:33%;" />
+
+令G<sub>m</sub> = 0，得到：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816075512704.png" alt="image-20230816075512704" style="zoom:50%;" />                        <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816080054223.png" alt="image-20230816080054223" style="zoom:33%;" />
+
+​		物理意义：当输入的差模信号 -V<sub>in,diff1</sub> ≤ V<sub>in,diff</sub> ≤ V<sub>in,diff1</sub>时，跨导不为零，而当V<sub>in,diff</sub> > |V<sub>in,diff1</sub>|时，只有一个管子导通，电路失去控制作用。
+
+结论：有效差模信号的输入范围为
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816080610528.png" alt="image-20230816080610528" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816080819911.png" alt="image-20230816080819911" style="zoom:50%;" />
+
+ 注：其中的<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816081122764.png" alt="image-20230816081122764" style="zoom:33%;" />就是平衡状态（I<sub>D1</sub> = I<sub>D2</sub>=I<sub>ss</sub>/2）下管子的过驱动电压。
+
+- 小信号分析方法一
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816111653200.png" alt="image-20230816111653200" style="zoom: 33%;" />
+
+先考虑V<sub>in1</sub>的作用：               <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816111924389.png" alt="image-20230816111924389" style="zoom:33%;" />
+
+注：只考虑V<sub>in1</sub>的作用，故M<sub>2</sub>的栅极接地，电流源I<sub>SS</sub>等效于一个无穷大的电阻，故直接去掉。
+
+计算V<sub>in1</sub>对V<sub>x</sub>的影响：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816112410386.png" alt="image-20230816112410386" style="zoom:33%;" />，此时R<sub>D2</sub>和M<sub>2</sub>一起等效于一个电阻R<sub>s</sub>（不考虑体效应和沟道长度调制效应，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816112701635.png" alt="image-20230816112701635" style="zoom:33%;" />)。
+
+等效于一个带源极负反馈的共源极，增益为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816112734463.png" alt="image-20230816112734463" style="zoom:33%;" />
+
+计算V<sub>in1</sub>对V<sub>y</sub>的影响：左边等效于一个源跟随器，通过戴维南等效可得：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816141514437.png" alt="image-20230816141514437" style="zoom: 33%;" />
+
+其中R<sub>T</sub>为源跟随器的输出电阻，不考虑体效应和沟道长度调制效应时，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816141737384.png" alt="image-20230816141737384" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816141821689.png" alt="image-20230816141821689" style="zoom:33%;" />
+
+由叠加原理可得：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816142326888.png" alt="image-20230816142326888" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816142352436.png" alt="image-20230816142352436" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816142409948.png" alt="image-20230816142409948" style="zoom:33%;" />
+
+- 小信号分析方法二：半边电路法
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816143122747.png" alt="image-20230816143122747" style="zoom:33%;" />
+
+​		电路中对于P点来说M<sub>1</sub>和M<sub>2</sub>均相当于源跟随器，当两边的输入变化是对称时，最后的结果是V<sub>p</sub>是一个常数，即对于小信号来说等效于“地”。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816143614294.png" alt="image-20230816143614294" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816144019041.png" alt="image-20230816144019041" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816144035946.png" alt="image-20230816144035946" style="zoom:33%;" />
+
+> 对于小信号差动电路的分析，只需要对电路进行半边电路等效，找到交流地的点，随后只用分析半边电路即可。
+
+> 值得注意的是：
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816145318447.png" alt="image-20230816145318447" style="zoom:33%;" />
+>
+> 电路的输出特性曲线如图所示，是一个曲线，故当V<sub>GS</sub>左右波动相同电压时，输出的电流左右波动大小不同，电流I<sub>D1</sub>或I<sub>D2</sub>增加的量大于减小的量，故导致P点的电压会产生波动，且波动频率是V<sub>in1,2</sub>频率的2倍。
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816145947176.png" alt="image-20230816145947176" style="zoom:33%;" />
+>
+> 结论：**P点并不是理想的交流小信号“地”**，只有当输入信号较小时，P点的电压波动较小，才可以忽略；当输入信号较大时，P点的波动也较大，不可忽略，此时电路可以当作一个倍频器使用，**P点波形的频率等于输入信号频率的2倍**。
+
+### 4.3 共模响应
+
+​		电路将两个管子栅极相连，只输入V<sub>in,CM</sub>共模信号，理想情况下电路输出只有共模信号，差模信号输出为0。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816222614460.png" alt="image-20230816222614460" style="zoom:33%;" />
+
+​		在实际非理想的情况下：
+
+1. **M<sub>3</sub>管并不是理想的电流源（有限的非电流源阻抗）**，内阻小于无穷大且由于沟道调制作用的影响，会导致偏置电流产生波动；
+2. **M<sub>1</sub>和M<sub>2</sub>两个管子并不是完全一样的（失配）**，会导致电流源的电流分配后流过该两个管子的电流并不是I<sub>SS</sub>/2，两个管子的电流不同，最后导致V<sub>out1</sub>和V<sub>out2</sub>电压值不同，即电路最后会产生差模输出信号，将一个共模变化转化成了差模变化。
+
+​		理想情况下，进行分析，可得等效电路：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816223819745.png" alt="image-20230816223819745" style="zoom:33%;" />
+
+​		可得共模增益为：         <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816223926522.png" alt="image-20230816223926522" style="zoom:33%;" />，**共模增益越小越好**（让R<sub>SS</sub>越大越好）。
+
+​		实际情况下：                                                        <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817094520752.png" alt="image-20230817094520752" style="zoom:33%;" />
+
+可得：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817094645820.png" alt="image-20230817094645820" style="zoom:33%;" />         <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817094709216.png" alt="image-20230817094709216" style="zoom:33%;" />       <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817094746148.png" alt="image-20230817094746148" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817094819113.png" alt="image-20230817094819113" style="zoom:33%;" />
+
+得到实际情况中共模输入时差模增益为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817094916417.png" alt="image-20230817094916417" style="zoom:33%;" />，越好越好，希望为0。
+
+共模抑制比**CMRR**：![image-20230817095939535](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817095939535.png)
+
+
+
+如何提高共模抑制比：（1）减小Δg<sub>m</sub>的值，即两个管子尽量一样；（2）R<sub>SS</sub>尽量大，增加尾管的尺寸。
+
+### 4.4 吉尔伯特单元
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817165217197.png" alt="image-20230817165217197" style="zoom:50%;" />
+
+​		图（a）中的电路，控制电压确定了尾电流的大小，从而决定了增益的大小；此电路的缺点是增益是单向的，增益不能反向变化。图（b）中的两个电路增益一正一负，如果可以将两个电路输出信号相加，即可得到双向增益。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817164815476.png" alt="image-20230817164815476" style="zoom: 67%;" />
+
+​		图（a）中将两个放大器的输出电压进行相加可以得到，最简单的方式是将两个输出直接相连，但直接相连后的电路的输出电阻会被改变，故想实现两个电压相加较为困难。转变思想，直接将两个电路的输出信号以电流的形式进行相加较为容易，如图（b）所示，其中V<sub>cont1,2</sub>分别控制两个差动对的电流从而控制增益大小，可得：
+
+​                                                  <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817202639012.png" alt="image-20230817202639012" style="zoom:33%;" />                <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817202721033.png" alt="image-20230817202721033" style="zoom:33%;" />
+
+这种连接方式可以实现放大器电路的增益从负到正的变化。为了提高增益控制效率，再增加一对差动对，两个差动管共用电流源I<sub>SS</sub>，用来进行电流源I<sub>SS</sub>的第一次分配，M<sub>5,6</sub>两个管子其中一个管子的电路增大，另一个管子电流会自动减小（总和为I<sub>SS</sub>不变），电路结构改进如图（d）可以实现一个可变增益放大器，V<sub>cont</sub>同时控制两个差动对的电流大小，实现宽范围的调节，缺点是输出范围会减小一个V<sub>OD</sub>（因为多了一对MOS管）。
+
+> 吉尔伯特单元应用：1，可变增益放大器，如上所述
+>
+> ​								  2，混频器，上图（d）中的V<sub>in</sub>和V<sub>cont</sub>两个输入信号为频率不同的正弦交流信号时，V<sub>out</sub>输出信号是两个输入信号乘积的函数，经过积化和差公式的推导，得到频率相加减的效果。
+
+## 第5章 电流镜与偏置技术
+
+​		本章目的：电流镜和偏置电路的设计
+
+### 5.1 基本电流镜
+
+​		电流源是模拟IC中的一个基础模块，如何获得一个稳定的电流源是一个重要的问题。
+
+​		**影响模拟电路性能的几个主要因素：P（工艺），V（电源电压），T（温度），L（负载波动）**
+
+​		如何获得一个稳定的电流源呢？
+
+​		解决方式：通过**将一个稳定的电流基准“复制”过来即可**（基准电流的产生后面章节内容，本章只用将参考电流基准复制即可）。
+
+- 复制电路原理：
+
+​                                          <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818115001877.png" alt="image-20230818115001877" style="zoom: 33%;" />		<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818115025445.png" alt="image-20230818115025445" style="zoom: 33%;" />              <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818115106767.png" alt="image-20230818115106767" style="zoom: 33%;" />
+
+- 基本电流镜电路：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818115314204.png" alt="image-20230818115314204" style="zoom:33%;" />
+
+- 电流镜产生n*I<sub>REF</sub>：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818115607335.png" alt="image-20230818115607335" style="zoom: 33%;" />，电流放大倍数由两个该管子的器件尺寸比值决定。
+
+​		注：电路中M<sub>1</sub>肯定工作于饱和区，M<sub>2</sub>的不一定，它的工作状态由其漏极连接的外电路决定。
+
+举个例子：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818120941520.png" alt="image-20230818120941520" style="zoom: 67%;" />
+
+图中M<sub>0</sub>构成的电流镜由于尺寸比为1：2，得到流入M<sub>5</sub>电流镜的电流为2I<sub>REF</sub>，由于尺寸比为1：5，故流入M<sub>1</sub>管的电流为2.5I<sub>REF</sub>，故可得M<sub>3</sub>中的电流为0.5I<sub>REF</sub>，故M<sub>5</sub>和M<sub>3</sub>的电流大小比为4：1。此电路中的电流大小完全与电压等因素无关，电流的大小关系只由管子的尺寸比决定。
+
+- 电流镜作为电流放大器
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818121812448.png" alt="image-20230818121812448" style="zoom: 50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818121852755.png" alt="image-20230818121852755" style="zoom:33%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818121918230.png" alt="image-20230818121918230" style="zoom:33%;" />
+
+### 5.2 共源共栅电流镜
+
+​		上述基本电流镜电流分析均忽略了沟道长度调制效应，当考虑此效应时，会发现由于M<sub>2</sub>管的漏极电压不确定导致V<sub>DS</sub>不确定，最后导致“复制”的电流结果不对。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818151057853.png" alt="image-20230818151057853" style="zoom:33%;" />
+
+- 为了抑制沟道长度调制效应的影响，采用共源共栅结构（此结构输出电阻很大，可以有效抑制沟道长度调制效应带来的电流波动）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818151813415.png" alt="image-20230818151813415" style="zoom: 33%;" />电路改进：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818151903669.png" alt="image-20230818151903669" style="zoom: 33%;" />
+
+​		在M<sub>2</sub>的漏极增加一个NMOS，M<sub>3</sub>作为保护管（或屏蔽管），由于M<sub>3</sub>的输出电阻值很大，故当P点输入电流产生波动时产生的电压波动很小，传至M<sub>2</sub>的漏极电压波动很小，故达到抑制沟道长度调制效应的效果。（**实质是M<sub>2</sub>和M<sub>3</sub>之间的负反馈产生了很大的输出电阻**，导致整个结构对电流电压的波动不那么敏感）
+
+- 如果可以保证V<sub>Y</sub> = V<sub>X</sub>，就可以使得I<sub>out</sub> = I<sub>REF</sub>，故要求：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818152731097.png" alt="image-20230818152731097" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818190033828.png" alt="image-20230818190033828" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818190301221.png" alt="image-20230818190301221" style="zoom:33%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818190332636.png" alt="image-20230818190332636" style="zoom:33%;" />
+
+输出电压V<sub>P</sub>的最小值：![image-20230818190938730](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818190938730.png)，对于低压电路来说输出最低工作电压损失太大了。
+
+​		如果不要求V<sub>Y</sub> = V<sub>X</sub>，就可以降低V<sub>b</sub>的电压值，就可以得到一个更低的V<sub>P</sub>。
+
+在P点处连接一个电压源，电压从0不断增大：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818205943276.png" alt="image-20230818205943276" style="zoom:50%;" />
+
+可以得到：
+
+1. 当V<sub>X</sub> > V<sub>N</sub> - V<sub>TH3</sub> 时，M<sub>3</sub>和M<sub>2</sub>两个管子都工作于饱和区
+2. 当V<sub>X</sub> < V<sub>N</sub> - V<sub>TH3</sub> 时，M<sub>3</sub>工作于线性区，M<sub>2</sub>工作于饱和区
+3. 共源共栅电流镜的优点：可以精确的复制电流，且偏置不复杂；缺点：多消耗了一个V<sub>TH</sub>。
+
+- 低压共源共栅电流镜
+
+​                                             <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818214928420.png" alt="image-20230818214928420" style="zoom: 50%;" />，M<sub>2</sub>的漏极直接连接至M<sub>1</sub>的栅极，V<sub>X</sub> = V<sub>GS1</sub>。
+
+如何设置V<sub>b</sub>：          <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818215340957.png" alt="image-20230818215340957" style="zoom:50%;" />
+
+得到V<sub>b</sub>范围：           <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818215434577.png" alt="image-20230818215434577" style="zoom:33%;" />
+
+​                        <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818215810711.png" alt="image-20230818215810711" style="zoom: 50%;" />              <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818215844936.png" alt="image-20230818215844936" style="zoom:33%;" />         
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818215932595.png" alt="image-20230818215932595" style="zoom:33%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818215946262.png" alt="image-20230818215946262" style="zoom:33%;" />
+
+​		结论：此电路可以准确复制电流，且V<sub>P</sub>的电压最小值较低，具备低压特性。
+
+​		但其中的偏置电压V<sub>b</sub>还需要另外的电路产生符合条件（<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818220531920.png" alt="image-20230818220531920" style="zoom: 33%;" /> = 2V<sub>OD</sub> + V<sub>TH</sub> )的电压。
+
+**产生V<sub>b</sub>的方式：**
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818221317241.png" alt="image-20230818221317241" style="zoom: 50%;" />
+
+​		采用图示电路产生V<sub>b</sub>，其中M<sub>5,6</sub>两个管子的要求：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818221608092.png" alt="image-20230818221608092" style="zoom:33%;" />，利用电阻R<sub>b</sub>的压降替代M<sub>1</sub>管导通电压V<sub>TH1</sub>，使得<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818221817580.png" alt="image-20230818221817580" style="zoom:33%;" />，得到<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818221837268.png" alt="image-20230818221837268" style="zoom:33%;" />。
+
+​		缺点：由于使用电阻替代导通电压V<sub>TH1</sub>，电阻的工艺问题导致生成的电压会上下浮动，不准确；由于想让M<sub>5</sub>
+
+管替代M<sub>2</sub>管，让M<sub>6</sub>管替代M<sub>1</sub>管，但管子之间的体效应不同，故导致最后电压有所不同。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818222353139.png" alt="image-20230818222353139" style="zoom:50%;" />
+
+​		由于上面电路使用电阻导致不好的结果，故使用MOS管替代电阻，利用M<sub>7</sub>管替代M<sub>1</sub>管导通电压V<sub>TH1</sub>，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818222554042.png" alt="image-20230818222554042" style="zoom:33%;" />（M<sub>7</sub>需要有特别长的沟道才可以实现两个电压相等），得到<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818222815561.png" alt="image-20230818222815561" style="zoom:33%;" />。
+
+​		缺点：仍然存在体效应的影响。
+
+​		**上述的两种电路了解即可，均存在问题，不适合实际应用。**
+
+- 自偏置的共源共栅电流镜：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819092800398.png" alt="image-20230819092800398" style="zoom:50%;" />
+
+优点：结构简单，开销小；缺点：由于电阻工艺会导致输出产生波动。
+
+- 使用另一个管子产生V<sub>b</sub>（stacked MOS）：（简单实用）
+
+​                  <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819094719964.png" alt="image-20230819094719964" style="zoom:50%;" />        其中M<sub>5</sub>也可以用两个管子串联的形式表示：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819093314965.png" alt="image-20230819093314965" style="zoom:50%;" />
+
+优点：由于输出电压由管子的尺寸比决定，故准确度高。
+
+### 5.3 有源电流镜
+
+​		将电流镜作为差动对的负载得到有源电流镜，**是一个放大器**。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819103524137.png" alt="image-20230819103524137" style="zoom: 33%;" />
+
+​		**输入是差动信号，输出是单端。**当输入V<sub>in</sub>增大，导致V<sub>GS1</sub>增大，故 I<sub>D1</sub>增大，I<sub>D2</sub>减小（ I<sub>D1</sub> +  I<sub>D2</sub> =  I<sub>SS</sub>），同时由于电流镜的作用I<sub>D4</sub>增大（M<sub>2</sub>和M<sub>4</sub>串联，一个电流要增大，一个电流要减小，此时由电流小的管子决定）故M<sub>4</sub>进入线性区，导致V<sub>out</sub>急剧增大。故此电路由于电流镜的作用成为一个放大器，将输入的电压放大。
+
+- 大信号分析
+
+​		差模输出偏置点：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819105837588.png" alt="image-20230819105837588" style="zoom: 33%;" />
+
+当V<sub>in1</sub> = V<sub>in2</sub>时，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819110332924.png" alt="image-20230819110332924" style="zoom:33%;" />，由于结构的对称性，M<sub>1，2</sub>的电流相同，又由于电流镜的作用，M<sub>3,4</sub>的电流相同，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819110258798.png" alt="image-20230819110258798" style="zoom:33%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819110317001.png" alt="image-20230819110317001" style="zoom:33%;" />。
+
+结论：**当V<sub>in1</sub> = V<sub>in2</sub>时，V<sub>out</sub> = V<sub>F</sub>**，电路的直流大信号偏置点是确定的唯一解。
+
+​		输入的共模信号范围：（考虑共模，即让所有的管子都工作在饱和状态）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819110718693.png" alt="image-20230819110718693" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819110852964.png" alt="image-20230819110852964" style="zoom:33%;" />
+
+​		V<sub>in,CM</sub>最小值保证M<sub>5</sub>饱和，V<sub>out</sub>的范围与V<sub>in,CM</sub>有关。	
+
+-  差模小信号分析
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819112451578.png" alt="image-20230819112451578" style="zoom:33%;" />由于电路结构不对称，故半边电路等效方法不能用，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819112615345.png" alt="image-20230819112615345" style="zoom:33%;" />
+
+​		计算等效跨导和负载电阻的值：
+
+​                             <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819112859810.png" alt="image-20230819112859810" style="zoom:33%;" />                 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819112931780.png" alt="image-20230819112931780" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819113319900.png" alt="image-20230819113319900" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819113336530.png" alt="image-20230819113336530" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819113351874.png" alt="image-20230819113351874" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819113408828.png" alt="image-20230819113408828" style="zoom:33%;" />
+
+​                                               <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819113446823.png" alt="image-20230819113446823" style="zoom:33%;" />          <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819114107549.png" alt="image-20230819114107549" style="zoom: 33%;" />
+
+小信号增益：     <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819114142400.png" alt="image-20230819114142400" style="zoom:33%;" />
+
+- 总结：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819201027020.png" alt="image-20230819201027020" style="zoom: 33%;" />
+
+​		当V<sub>in1</sub>和V<sub>in2</sub>一个增大一个减小时，假设V<sub>in1</sub>增大V<sub>in2</sub>减小，此时M<sub>1</sub>管的电流增大，M<sub>2</sub>管的电流减小，导致M<sub>3</sub>管的电流也增大，故M<sub>3</sub>管的|V<sub>GS</sub>|增加，从而使得V<sub>F</sub>减小为V<sub>F</sub>‘，M<sub>4</sub>管电流增大为I<sub>M4</sub>’，导致V<sub>out</sub>电压增大。
+
+​		结论：当差动电压变化时，引起的M<sub>1</sub>管和M<sub>2</sub>管电流变化几乎相等，但引起的V<sub>F</sub>和V<sub>out</sub>的变化完全不对称（F点是小阻抗≈1/g<sub>m3</sub>，out点是大阻抗 = R<sub>o2</sub>|| R<sub>o4</sub>），见图中的ΔV<sub>F</sub>和ΔV<sub>out</sub>。
+
+- 共模响应：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819203134385.png" alt="image-20230819203134385" style="zoom:33%;" />
+
+1，考虑尾管电流源的有限阻抗
+
+​		对于单端输出的电路，和差动对不同（差动对还需要两个管子失配才会受到共模的影响），直接会受到共模的影响，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819203456537.png" alt="image-20230819203456537" style="zoom: 33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819203609444.png" alt="image-20230819203609444" style="zoom:33%;" />
+
+​		注：由于对称性，V<sub>out</sub>和V<sub>F</sub>一直相同，故可以将两点直接连接。得到的等效信号模型实质为带源极负反馈的共源极。
+
+得到共模增益为：       <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819203856588.png" alt="image-20230819203856588" style="zoom:33%;" />
+
+得到共模抑制比**CMRR**（Commom-mode rejection ratio）：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819204155176.png" alt="image-20230819204155176" style="zoom:33%;" />
+
+注：这里的CMRR定义和全差动对的定义不同。
+
+- 五管单元（有源电流镜）与全差动对的比较：
+
+1. 共模特性（CMRR）比较：           <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819204506615.png" alt="image-20230819204506615" style="zoom: 33%;" />
+
+​		五管单元的共模抑制特性比全差动对差。
+
+2. 电源波动抑制特性（PSRR）比较：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819204852467.png" alt="image-20230819204852467" style="zoom:33%;" />
+
+​		五管单元对于电源波动的抑制能力非常差。
+
+### 5.4 偏置技术
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819213948907.png" alt="image-20230819213948907" style="zoom: 50%;" />
+
+​		图（a）中V<sub>B</sub>提供偏置点，V<sub>in</sub>输入交流信号，但两个信号会相互干扰；图（b）所示，使用一个大电阻将V<sub>B</sub>接入，使用大电容实现交流耦合将V<sub>in</sub>输入（要想输入信号损失越小，就要求电阻和隔直电容值越大越好）；
+
+## 第6章 放大器的频率特性
+
+​		本章目的：研究单级放大器和差动放大器在频域中的响应
+
+### 6.1 概述
+
+​		简单回顾：零点是系统传输函数中分子的根，极点是系统函数中分母的根；对于一阶系统（即单极点系统），ω通过一个极点频率时以20dB/dec下降（频率每增加十倍，对应的幅值减小20dB）；当ω通过一个零点频率时以20dB/dec上升；一个零点可以和一个极点作用抵消。
+
+- 极点与结点的关联
+
+​		==**电路存在的每一个结点均会贡献一个极点**==。
+
+**结点分析法**：
+
+例1：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821171610801.png" alt="image-20230821171610801" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821171814202.png" alt="image-20230821171814202" style="zoom:33%;" />
+
+其中的![image-20230821171836347](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821171836347.png)为电路的直流响应（即频率为0的增益)，后面的每一个结点均贡献一个极点，**每个极点的频率 *ω*<sub>pM</sub> = 1/R<sub>M</sub> * C<sub>M</sub>**，其中**R<sub>M</sub>是指每个结点处对地的电阻值，而C<sub>M</sub>是指每个结点的总电容值**。
+
+例2：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821172833093.png" alt="image-20230821172833093" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821172943667.png" alt="image-20230821172943667" style="zoom: 33%;" />
+
+其中R<sub>S</sub>是电路的输入电阻。
+
+例3：忽视沟道调制效应
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821182402029.png" alt="image-20230821182402029" style="zoom: 33%;" />
+
+​                                              <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821182508894.png" alt="image-20230821182508894" style="zoom:33%;" />               <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821182530715.png" alt="image-20230821182530715" style="zoom:33%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821182606679.png" alt="image-20230821182606679" style="zoom:33%;" />
+
+### 6.2 共源极
+
+- 密勒定理
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821183140048.png" alt="image-20230821183140048" style="zoom:33%;" />
+
+==**使用条件：电路要有信号的主通路和辅助通路，主通路提供增益，辅助通路提供阻抗。**==
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230821211507461.png" alt="image-20230821211507461" style="zoom:50%;" />
+
+**等效的输入电容被放大（1+A）倍，等效输出电容不变**。可以做一个电容放大器。
+
+- 共源极的高频等效模型如下：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822101654704.png" alt="image-20230822101654704" style="zoom: 50%;" />
+
+1. 情况一：**R<sub>S</sub>很小的情况**（如第一级中的电压源驱动，此时R<sub>S</sub>为电压源内阻很小）
+
+​		采用米勒近似的简化电路如下：                   <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822102314026.png" alt="image-20230822102314026" style="zoom:50%;" />
+
+在X结点的总电容为C<sub>GS</sub> + （1 + g<sub>m</sub>R<sub>D</sub>）C<sub>GD</sub>，X结点的对地电阻为R<sub>S</sub>，X结点的频率<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822102705411.png" alt="image-20230822102705411" style="zoom:33%;" />（ω*<sub>pM</sub> = 1/R<sub>M</sub> * C<sub>M</sub>）；
+
+在输出结点总电容为C<sub>GD</sub> + C<sub>GD</sub>，输出结点的电阻为R<sub>D</sub>，输出结点的频率<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822103008449.png" alt="image-20230822103008449" style="zoom: 33%;" />；
+
+2. 情况二：**R<sub>S</sub>很大的情况**（如中间级电路前一级的输出电阻很大，即此中间级电路的输入电阻R<sub>S</sub>很大）
+
+   <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822103322824.png" alt="image-20230822103322824" style="zoom: 33%;" />
+
+此时输入节点的频率ω<sub>in</sub>不变，依然可以通过米勒等效表达，总电容为C<sub>GS</sub> + （1 + g<sub>m</sub>R<sub>D</sub>）C<sub>GD</sub>，X结点的对地电阻为R<sub>S</sub>，X结点的频率<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822102705411.png" alt="image-20230822102705411" style="zoom:33%;" />（ω*<sub>pM</sub> = 1/R<sub>M</sub> * C<sub>M</sub>）；但是输出电阻改变，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822104134796.png" alt="image-20230822104134796" style="zoom:33%;" />，总电阻为<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822104209614.png" alt="image-20230822104209614" style="zoom:50%;" />，等效电容<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822104251873.png" alt="image-20230822104251873" style="zoom:33%;" />（即C<sub>GD</sub>和C<sub>GS</sub>串联），故总电容为C<sub>eq</sub> + C<sub>DB</sub>，结点频率为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822104505356.png" alt="image-20230822104505356" style="zoom:50%;" />，**其中当C<sub>GD</sub> >> C<sub>GS</sub>时，ω<sub>p,out</sub> = g<sub>m</sub>/（C<sub>GS</sub> + C<sub>DB</sub>)**。
+
+> ==总结：==
+>
+> 输入结点频率：               <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822104951166.png" alt="image-20230822104951166" style="zoom:50%;" />
+>
+> 输出结点频率：            <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822105017480.png" alt="image-20230822105017480" style="zoom:50%;" />
+>
+> ![image-20230822105159894](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822105159894.png)，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822110103418.png" alt="image-20230822110103418"  />
+>
+> 增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822110256717.png" alt="image-20230822110256717" style="zoom:50%;" />
+>
+> 米勒等效忽略了电路的零点，此被忽略的零点的频率为![image-20230822142010425](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822142010425.png)，其中的“ + ”表示零点位于右半平面，对于系统的稳定性有害。
+>
+> 关于零点的经验：**电路中含有两条以上的通路就会产生零点**。例如<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822112730017.png" alt="image-20230822112730017" style="zoom: 67%;" />![image-20230822113238613](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822113238613.png)
+>
+> 如何计算此零点：在此零点的复频率S<sub>Z</sub>下，V<sub>out</sub> = 0；输出端没有电流，可得<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822141820180.png" alt="image-20230822141820180" style="zoom:33%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822141910233.png" alt="image-20230822141910233" style="zoom:33%;" />
+
+- 共源极的输入阻抗（由于米勒等效的作用）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230822142153621.png" alt="image-20230822142153621" style="zoom:50%;" />
+
+注：共源极的输入电阻是无穷大的，输入阻抗与电阻的不同是要考虑虚部，**在高频的情况下输入阻抗并不是无穷大，随着频率的增大输入阻抗不断减小**。
 
