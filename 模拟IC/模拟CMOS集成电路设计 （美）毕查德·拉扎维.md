@@ -877,3 +877,411 @@
 
 ## 第7章 噪声
 
+​		本章目的：将随机噪声进行量化，可以在模拟电路的设计中更直观方便的考虑噪声。
+
+### 7.1 噪声的统计特性
+
+​		噪声限制了一个电路能够正确处理的最小信号电平。
+
+​		噪声的幅值是不可预测的，但平均功率是可预测的，功率P = u^2^/R，通常令R = 1，故功率P = U^2^
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823105339134.png" alt="image-20230823105339134" style="zoom:50%;" />
+
+​		噪声功率谱：将噪声功率放至在频域观察；PSD（power spectrum density）噪声功率密度：使用一个1Hz的带通滤波器去测量每个频率的功率。PED单位为<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823105958874.png" alt="image-20230823105958874" style="zoom:50%;" />，或者使用VSD（幅值功率密度），单位为<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823110052999.png" alt="image-20230823110052999" style="zoom:50%;" />
+
+​		在统计域中，噪声的平均功率可以用方差<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823111113659.png" alt="image-20230823111113659" style="zoom:50%;" />表示。
+
+噪声功率在统计域和频域中的表示与联系：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823111220365.png" alt="image-20230823111220365" style="zoom:50%;" />（统计域中）= <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823111410701.png" alt="image-20230823111410701" style="zoom:50%;" />（频域中）
+
+​		噪声之间如果不相关，两个噪声的功率和为<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823111939281.png" alt="image-20230823111939281" style="zoom:50%;" />，直接相加即可；噪声之间如果相关，噪声可以被增强或抵消，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823112127668.png" alt="image-20230823112127668" style="zoom: 50%;" />。
+
+信噪比（SNR）：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823112411033.png" alt="image-20230823112411033" style="zoom:50%;" />，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823112429625.png" alt="image-20230823112429625" style="zoom:50%;" />。
+
+​		**放大器只能降低SNR，不能提升SNR**，（放大器对于信号和噪声的放大能力相同，但电路本身会提供噪声，故使得SNR下降）
+
+### 7.2 噪声类型
+
+> ==只有电阻和MOS管贡献噪声，电容电感不会产生噪声==
+
+1. 电阻热噪声：
+
+​		建模：一个噪声电压源串联一个电阻，使用单边谱表达。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823145422786.png" alt="image-20230823145422786" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823145505663.png" alt="image-20230823145505663" style="zoom: 50%;" />
+
+其中K为玻尔兹曼常数，T为绝对温度
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823145631598.png" alt="image-20230823145631598" style="zoom:50%;" />
+
+诺顿等效：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823145717326.png" alt="image-20230823145717326" style="zoom:50%;" />
+
+例子：计算RC低通滤波器的噪声
+
+![image-20230823150506656](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823150506656.png)
+
+结论一阶RC电路中的**噪声是由电阻R产生，但噪声大小是由电容C决定的**。
+
+2. MOS管热噪声：针对工作于饱和区的长沟道MOS管
+
+​		建模：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823150910205.png" alt="image-20230823150910205" style="zoom:50%;" />
+
+注：随着沟道长度减小，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823150945647.png" alt="image-20230823150945647" style="zoom:50%;" />不断增大，最大至2.5。
+
+3. MOS管的欧姆区的热噪声：管子的栅，源，漏上的寄生电阻产生的热噪声
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230823151606888.png" alt="image-20230823151606888" style="zoom: 50%;" />
+
+4. MOS管的闪烁噪声（又名1/f 噪声）
+
+![image-20230824212705431](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824212705431.png)
+
+注：（1）此类噪声的建模是在栅极的电压，影响要转换为电流，故等效在栅极串联的一个电阻，和前面噪声的建模中的电阻（实际存在的寄生电阻）含义不同；（2）**此类噪声功率谱与频率成反比**，故被称为1/f 噪声，此类噪声与温度，跨导都无关。
+
+### 7.3 电路中的噪声表示
+
+1. 输出噪声：将输入端短接，在输出端看噪声
+
+​		例：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824214422922.png" alt="image-20230824214422922" style="zoom:50%;" />
+
+​		由于在输出端看噪声不太方便（想知道最小的有效输入信号的大小还需要根据输出端的信噪比和噪声功率算得输出端的信号功率，再通过放大电路的增益才可以得到输入信号的大小），故将输出端的噪声返回输入端（将输出端的噪声在输入端等效为一个输入噪声源）。
+
+2. 输入参考噪声：
+
+![image-20230824215140663](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824215140663.png)
+
+​		将电路中的噪声等效为一个无噪声电路的输入端连接一个噪声源。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824215301436.png" alt="image-20230824215301436" style="zoom:50%;" />
+
+​		例：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824215439957.png" alt="image-20230824215439957" style="zoom:50%;" />
+
+​		注：在上一个例的输出噪声中观察可得输出噪声大小与跨导成正比，而在此例中得到的输入噪声与跨导成反比，故将噪声等效到输入端后更加直观，也更准确。
+
+​		此时新的问题出现，当我们将等效到输入端的噪声源再输出到输出端时发现噪声被衰减了，原因是等效的输入噪声源再输入时被驱动信号的电阻和放大电路的输入电阻分压导致输入噪声被衰减，故**只是简单的将输出噪声等效为输入噪声电压源是错误的**。
+
+3. 输入噪声的另一种等效方式：等效为一个输入噪声电压源加一个电流源
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824220824227.png" alt="image-20230824220824227" style="zoom: 67%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824220918434.png" alt="image-20230824220918434" style="zoom:50%;" />
+
+​		如果驱动信号的是理想电压源（内阻为0），此时噪声电压源起作用；如果驱动信号的是一个很大的电阻，此时噪声电流源起作用。
+
+电压源和电流源大小的计算：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824221521174.png" alt="image-20230824221521174" style="zoom:50%;" />
+
+​		先将输入短路，计算V~n,in~；再将输入开路，计算 I~n,in~。
+
+电路等效模型：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824221836983.png" alt="image-20230824221836983" style="zoom:50%;" />
+
+其中Z~S~是驱动电阻，Z~in~是输入电阻。
+
+注：如果<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824222117133.png" alt="image-20230824222117133" style="zoom:50%;" />，电流源可以忽略；
+
+### 7.4 单级放大器中的噪声
+
+- 一个有用的辅助定理
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824222915925.png" alt="image-20230824222915925" style="zoom:50%;" />
+
+​		在满足条件时，可以将漏源之间的电流等效为栅极的一个电压源。
+
+1. 共源极：由于输入内阻很大，故不用考虑噪声电流源
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824223152993.png" alt="image-20230824223152993" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824223410578.png" alt="image-20230824223410578" style="zoom: 67%;" />
+
+​		只能通过增大跨导g~m~或者增大面积来减小噪声。
+
+> 反相器（或class--AB）:<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824223717446.png" alt="image-20230824223717446" style="zoom:67%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824223806658.png" alt="image-20230824223806658" style="zoom:67%;" />
+>
+> 是一个==非常有用的低噪声等效结构==。
+
+2. 共栅极：输入端电阻较小，故噪声电压源和电流源都要考虑
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824224135966.png" alt="image-20230824224135966" style="zoom:50%;" />
+
+​		先短路输入，计算V~n,in~：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824224335047.png" alt="image-20230824224335047" style="zoom:67%;" />
+
+​		再输入开路：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824224509063.png" alt="image-20230824224509063" style="zoom: 50%;" />
+
+​		输入开路后，相当于电路没有“地”，故输入电流为0，电流只能经过M~1~流入V~DD~，
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230824224751644.png" alt="image-20230824224751644" style="zoom:50%;" />
+
+> 共栅极电路中，电阻的中的噪声电流直接流入输入端，故==共栅极电路不适合用于做低噪声放大器==
+
+3. 电流偏置的共栅极：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825083713679.png" alt="image-20230825083713679" style="zoom:50%;" />
+
+4. 源跟随器：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825083815916.png" alt="image-20230825083815916" style="zoom:50%;" />
+
+5. 共源共栅极：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825083940382.png" alt="image-20230825083940382" style="zoom:50%;" />
+
+​		注：M~2~中的噪声可以忽略不计。
+
+6. 电流镜：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825084207583.png" alt="image-20230825084207583" style="zoom:50%;" />
+
+7. 差动对：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825084354162.png" alt="image-20230825084354162" style="zoom:50%;" />
+
+​		注：由于使用了两个MOS管，每一个管子都贡献了噪声，故噪声的功率是单端电路的两倍，噪声的电压是单端噪声的<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825084753754.png" alt="image-20230825084753754" style="zoom:50%;" />倍。
+
+​		尾电流源的噪声：只贡献共模噪声，对于差模噪声没有影响。
+
+### 7.5 噪声-功率的折中
+
+​		**噪声功率减半 <=> 电路的功耗和面积加倍**
+
+### 7.6 噪声带宽
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825085320590.png" alt="image-20230825085320590" style="zoom: 50%;" />
+
+## 第8章 反馈
+
+> 反馈能干啥？
+>
+> （1）对放大器的增益有所改善，使得增益对于环境、工艺等因素敏感度降低；
+>
+> （2）改变放大器的输入输出电阻；
+>
+> （3）改变放大器的带宽；（增益带宽积 = 增益 * 带宽 = 常数，故增益和带宽一个增大另一个只能减小）；
+>
+> （4）改善放大器的非线性，“虚短”；
+>
+> 其中各个量的改善程度由环路增益影响决定。
+
+### 8.1 概述
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825144948770.png" alt="image-20230825144948770" style="zoom:50%;" />
+
+注：（1）闭环增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145112542.png" alt="image-20230825145112542" style="zoom:50%;" />= ![image-20230826101001126](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826101001126.png)
+
+​		（2）开环增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145147509.png" alt="image-20230825145147509" style="zoom:50%;" /> = A~0~
+
+​		（3）**环路增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145224947.png" alt="image-20230825145224947" style="zoom:50%;" /> = A~0~ * β**
+
+​		（4）H(S) 处理的信号依然是小信号（由于整个电路的输入信号和反馈回来的信号均为大信号，两者做差输入放大器时依然为小信号）
+
+- 反馈电路的特性：
+
+1. 增益灵敏度降低：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825150839707.png" alt="image-20230825150839707" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825150905117.png" alt="image-20230825150905117" style="zoom:50%;" />
+
+注：A 很大但对于环境因素比较敏感；A~CL~对于环境不太敏感。
+
+> ==如何求环路增益==：
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825151815578.png" alt="image-20230825151815578" style="zoom:50%;" />
+>
+> （1）输入接小信号地
+>
+> （2）对于理想模型，在任意一点断开，并接入一个电压源V~t~，此时<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825151715767.png" alt="image-20230825151715767" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825151736678.png" alt="image-20230825151736678" style="zoom:50%;" />
+
+2. 终端阻抗的变化：
+
+例：  （求输入电阻）                          <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825163633689.png" alt="image-20230825163633689" style="zoom:50%;" />
+
+求开环输入电阻：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825163711023.png" alt="image-20230825163711023" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825163734247.png" alt="image-20230825163734247" style="zoom:50%;" />
+
+求闭环输入电阻：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825163803616.png" alt="image-20230825163803616" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825164846369.png" alt="image-20230825164846369" style="zoom:50%;" />
+
+例：（求输出电阻）<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825164336612.png" alt="image-20230825164336612" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825164444085.png" alt="image-20230825164444085" style="zoom:50%;" />
+
+![image-20230825164738261](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825164738261.png)
+
+> 结论：==闭环 = 开环 /（1 + 环路）==
+
+3. 带宽改变：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825165603702.png" alt="image-20230825165603702" style="zoom:50%;" />
+
+结论：**利用反馈可以增大信号带宽，但同时会减小增益，最终增益带宽积不变。**
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825165831636.png" alt="image-20230825165831636" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825165855230.png" alt="image-20230825165855230" style="zoom:50%;" />
+
+4. 反馈改变速度
+
+例：将一个20MHz的矩形波增益100倍
+
+​		方法一：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825170857926.png" alt="image-20230825170857926" style="zoom: 50%;" />
+
+注：当输入的矩形脉冲变形为上述形状时，表明通路带宽不够，故需要增大带宽；如何计算通路带宽，以及带宽和时间常数的关系如上图所示。
+
+> 时间常数*τ* = RC = 1/*ω*(角频率) = 1/2*π*f
+
+​		方法二：使用两级放大器级联
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825171559647.png" alt="image-20230825171559647" style="zoom:50%;" />
+
+5. 抑制非线性：开环放大器的非线性很严重，闭环后改善非线性，并有“虚短”的现象（可以通过检测放大器输入端两个电压的大小是否相等（即虚短）来判断放大器是否正常工作）。
+
+- 放大器的种类：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825190417130.png" alt="image-20230825190417130" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825190257741.png" alt="image-20230825190257741" style="zoom:50%;" />
+
+电压相加：差动对（两个输入信号相减）；利用V~GS~（V~GS~ = V~G~ - V~S~）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825214249502.png" alt="image-20230825214249502" style="zoom:50%;" />
+
+### 8.2 反馈结构
+
+1. VVF：（输出电压，反馈电压）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825214825509.png" alt="image-20230825214825509" style="zoom: 50%;" />
+
+对于反馈网络的要求：在电路输出端并联接入；在输入端串联接入；大输入电阻，小输出电阻；
+
+> 此类型的前路放大器的输入输出信号均为电压，故增益为无量纲的常数；反馈网络的输入输出均为电压，故增益为无量纲的常数。
+
+- 闭环增益：
+
+​                                  <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825215134813.png" alt="image-20230825215134813" style="zoom: 33%;" />                      <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825215158503.png" alt="image-20230825215158503" style="zoom:33%;" />                                   
+
+- 输出电阻计算：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825220131450.png" alt="image-20230825220131450" style="zoom: 33%;" />
+
+- 输入电阻计算：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825220432855.png" alt="image-20230825220432855" style="zoom:33%;" />
+
+>结论：对于VVF，对输入电阻是增加，对输出电阻是减小（增加或减小的倍数都是（![image-20230826102919514](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826102919514.png)）倍数)；判断反馈类型，求解环路增益。
+
+2. CVF：（输出电流，反馈电压）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826103107481.png" alt="image-20230826103107481" style="zoom:50%;" />
+
+​		其中的反馈网络是一个跨导放大器，对于反馈网络的要求：在电路输出端串联接入；在输入端串联接入；小输出电阻；小输入电阻。
+
+> 此类型的前路放大器中输入信号是电压，输出是电流，故增益为跨导；而反馈网络的输入信号是电流，输出是电压，故增益为电阻。
+
+- 闭环增益：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826104118286.png" alt="image-20230826104118286" style="zoom: 33%;" />
+
+- 环路增益：将输入短路，环路断开，接入一个电流源
+
+​                                                       <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826104623508.png" alt="image-20230826104623508" style="zoom:33%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826104754992.png" alt="image-20230826104754992" style="zoom:50%;" />
+
+​		注：环路增益 = 电导 * 电阻 = 无量纲的常数
+
+- 输入输出电阻计算：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826105032423.png" alt="image-20230826105032423" style="zoom: 33%;" />
+
+> 实际中参考电流的产生电路：参考电压接一个运放再接一个MOS管得到参考电流![image-20230826112107012](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826112107012.png)
+
+3. VCF：（输出电压，反馈电流）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826112446519.png" alt="image-20230826112446519" style="zoom:33%;" />
+
+​		对于反馈网络的要求：在电路输出端并联接入；在输入端并联接入；小输出电阻；大输入电阻。
+
+- 闭环增益：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826112741942.png" alt="image-20230826112741942" style="zoom: 33%;" />
+
+- 输入电阻和输出电阻计算：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826112900778.png" alt="image-20230826112900778" style="zoom: 33%;" />
+
+4. CCF：（输出电流，反馈电流）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826112953484.png" alt="image-20230826112953484" style="zoom:50%;" />
+
+​		对于反馈网络的要求：在电路输出端串联接入；在输入端并联接入；大输出电阻；小输入电阻。
+
+- 闭环增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826113108271.png" alt="image-20230826113108271" style="zoom:33%;" />
+
+- 输出输出电阻：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826113129130.png" alt="image-20230826113129130" style="zoom:33%;" />
+
+5. **==总结：==**
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826113233217.png" alt="image-20230826113233217" style="zoom:50%;" />
+
+### 8.3 反馈对噪声的影响
+
+### 8.4 反馈分析的困难
+
+- 通用分析步骤：
+
+​		（1）识别反馈类型
+
+​		（2）打断环路：计算开路增益，输入输出电阻
+
+​		（3）计算环路增益
+
+​		（4）得到闭环参数
+
+​		（5）使用环路增益判断电路稳定性
+
+​		困难一：加载效应（负载效应）
+
+​		由于反馈网络的非理想输入输出阻抗导致的“负载效应”，（当输入输出阻抗是理想的时候，打破环路的断点随意取即可），当“负载效应”存在时，断点的选取就有所不同，选错断点，分析就错。
+
+​		困难二：无法将电路清晰的分解为前馈放大器和反馈网络
+
+​		困难三：有的电路很难归类为标准类型
+
+​		困难四：环路不止一个
+
+​		困难五：多重反馈机制
+
+- 二端口网络方法解决加载效应
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826145648331.png" alt="image-20230826145648331" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826150153442.png" alt="image-20230826150153442" style="zoom:50%;" />
+
+例：使用G模型进行二端口网络分析解决加载效应的影响
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826195537611.png" alt="image-20230826195537611" style="zoom:50%;" />
+
+​		选定反馈网络，打断环路：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826195231449.png" alt="image-20230826195231449" style="zoom: 67%;" />
+
+> 将反馈网络断开，并将反馈网络完整copy一份，
+>
+> 计算g~11~：将反馈网络输出端悬空；
+>
+> 计算g~22~：将反馈网络的输入端接地；
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826195818237.png" alt="image-20230826195818237" style="zoom:50%;" />
+
+​		根据电流电压关系可得开环增益为：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826200454274.png" alt="image-20230826200454274" style="zoom:50%;" />
+
+​		计算闭环增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826200651253.png" alt="image-20230826200651253" style="zoom:50%;" />
+
+​		其中g~21~计算：将I~2~ = 0（即输出开路），随后  <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826200807149.png" alt="image-20230826200807149" style="zoom:50%;" />
+
+​		得到：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826200838594.png" alt="image-20230826200838594" style="zoom: 50%;" />
+
+## 第9章 运算放大器
+
