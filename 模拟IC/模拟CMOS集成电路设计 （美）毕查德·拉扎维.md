@@ -89,6 +89,8 @@
 > 3，对于NMOS：固定V<sub>DS</sub>的值，随着V<sub>G</sub>的增大，管子先进入饱和区，随后进入线性区；
 >
 > ​							 固定V<sub>G</sub>的值，随着V<sub>DS</sub>的增大，管子先进入线性区，随后进入饱和区；
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828105406424.png" alt="image-20230828105406424" style="zoom:50%;" />
 
 - MOSFET的跨导
 
@@ -1073,11 +1075,11 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825144948770.png" alt="image-20230825144948770" style="zoom:50%;" />
 
-注：（1）闭环增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145112542.png" alt="image-20230825145112542" style="zoom:50%;" />= ![image-20230826101001126](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826101001126.png)
+注：（1）闭环增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145112542.png" alt="image-20230825145112542" style="zoom:50%;" />= ![image-20230826101001126](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826101001126.png)，代表放大器增益的大小
 
 ​		（2）开环增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145147509.png" alt="image-20230825145147509" style="zoom:50%;" /> = A~0~
 
-​		（3）**环路增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145224947.png" alt="image-20230825145224947" style="zoom:50%;" /> = A~0~ * β**
+​		（3）**环路增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145224947.png" alt="image-20230825145224947" style="zoom:50%;" /> = A~0~ * β**，==**决定增益的精度**==
 
 ​		（4）H(S) 处理的信号依然是小信号（由于整个电路的输入信号和反馈回来的信号均为大信号，两者做差输入放大器时依然为小信号）
 
@@ -1284,4 +1286,184 @@
 ​		得到：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826200838594.png" alt="image-20230826200838594" style="zoom: 50%;" />
 
 ## 第9章 运算放大器
+
+​		本章目的：讨论CMOS运放的分析与设计
+
+### 9.1 概述
+
+​		对于电压输入的放大器主要有两种：运算放大器（Opamp）和运算跨导放大器（OTA）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230827182553935.png" alt="image-20230827182553935" style="zoom: 50%;" />
+
+​		注：其中OTA输出电阻大，适合用作电流输出型放大器，但实际应用也有将其作为电压输出型，只用接一个比内阻大的多的负载即可实现（例如OTA常作为电压输出型驱动MOS管的栅极，栅极的输入阻抗理论上是无穷大的）。
+
+> **放大器电压输出型和电流输出型的区别与联系：**当放大器的内阻r~o~较小时（即外接的R~L~ >> r~O~）适合使用电压输出型（电阻串联分压），当放大器的内阻r~o~较大时（即外接的R~L~ << r~O~）适合使用电流输出型（电阻并联分流）
+>
+> ![image-20230827191534266](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230827191534266.png)
+
+- 性能参数：
+
+  增益；
+
+  小信号带宽；
+
+  <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230827193802274.png" alt="image-20230827193802274" style="zoom:50%;" />
+
+  其中单位增益频率点 f~u~ = A~0~（= 1） * f~-3dB~ = 增益带宽积（GBW）。
+
+  注：A~0~决定了放大器的精度，A~0~ * ω 决定了放大器的速度。
+
+  大信号带宽；
+
+  输出信号摆幅；
+
+  线性度；
+
+  噪声；偏置；
+
+  电源抑制。
+
+### 9.2 单极放大器
+
+​		差动放大器均称为运放。
+
+1. 差动对
+
+- 有源电流镜驱动的差动放大器
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230827202003403.png" alt="image-20230827202003403" style="zoom:50%;" />
+
+ <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230827204851507.png" alt="image-20230827204851507" style="zoom:50%;" />
+
+> ==**单极点近似**==：一个放大器系统含有多个极点，当只有一个极点位于单位增益频率点的左边（即只有一个极点频率小于单位增益频率），其他的极点均位于单位增益频率点的右边。
+>
+> 优点：（1）单位增益频率 ω~u~ 可以尽可能的大；（因为ω通过一个极点频率时以20dB/dec下降（频率每增加十倍，对应的幅值减小20dB））（2）系统更加稳定。
+
+- 电流源负载的全差动对
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230827203229796.png" alt="image-20230827203229796" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230827204924830.png" alt="image-20230827204924830" style="zoom:50%;" />
+
+- 设计步骤：
+
+**（0）根据运放的速度以及负载的大小，计算出GBW的值，GBW = g~m~/C~L~，计算出输入管的g~m~；g~m~ = 2I~D~ / V~OD~**
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230827204447112.png" alt="image-20230827204447112" style="zoom:50%;" />
+
+​		注：设计步骤是从运放的速度和范围开始。
+
+> 差动对的增益太低，故引出了共源共栅
+
+2. 共源共栅极OTA
+
+- 单端输出cascode OTA
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828103849440.png" alt="image-20230828103849440" style="zoom:50%;" />
+
+​		缺点：V~out,DC~太小了，限制了电路的输出摆幅。
+
+- 宽摆幅单端输出cascode OTA
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828111224855.png" alt="image-20230828111224855" style="zoom:50%;" />
+
+​		结论：采用低压共源共栅的电路虽然偏置更加复杂一点（需要单独对M~5~和M~6~进行偏置）但可以获得更大的输出摆幅。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828111956907.png" alt="image-20230828111956907" style="zoom:50%;" />
+
+- 全差动cascode OTA
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828112510645.png" alt="image-20230828112510645" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828112545798.png" alt="image-20230828112545798" style="zoom: 50%;" />
+
+例：运放整个设计流程
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828145140680.png" alt="image-20230828145140680" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828145310882.png" alt="image-20230828145310882" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828145520938.png" alt="image-20230828145520938" style="zoom:50%;" />
+
+- 单位增益共源共栅
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828150821035.png" alt="image-20230828150821035" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828150844684.png" alt="image-20230828150844684" style="zoom:50%;" />
+
+- 线性缩放：当其他参数需要保持不变，只有功率预算不同时：
+
+  例：需要功耗加倍，所有MOS管的宽度加倍，长度不变
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828151420438.png" alt="image-20230828151420438" style="zoom:50%;" />
+
+> 共源共栅极由于输入输出相互限制，导致了输出摆幅不够大
+
+3. 折叠型的cascode OTA
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828183504960.png" alt="image-20230828183504960" style="zoom: 33%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828183528767.png" alt="image-20230828183528767" style="zoom:33%;" />
+
+> 折叠：将输入MOS管的类型变换一下，类型转换之后没有了对地的通路，此时需要添加一个电流源。
+>
+> 优点：将输入V~in~和输出V~out~隔离开，解决共源共栅由于输入输出相互限制导致输出摆幅太小的问题。
+
+- 差动折叠cascode OTA
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828184243913.png" alt="image-20230828184243913" style="zoom:50%;" />
+
+- 全差动折叠cascode OTA
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828184441098.png" alt="image-20230828184441098" style="zoom:50%;" />
+
+​		注：输出摆幅增大
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828184559399.png" alt="image-20230828184559399" style="zoom:50%;" />
+
+​		注：输出增益减小
+
+### 9.3 两级运放
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828185443966.png" alt="image-20230828185443966" style="zoom:50%;" />
+
+例：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828190255732.png" alt="image-20230828190255732" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828190446850.png" alt="image-20230828190446850" style="zoom:50%;" />
+
+​		优点：非常大的增益，中等功耗；缺点：稳定性问题；第二级的静态工作点不容易设置
+
+> 对于稳定性问题的说明：对于一级放大器来说，高阻抗极点只有一个（在输出端节点，由于输出电阻很大，导致输出极点频率较小），所以很容易实现单极点近似；而对于二级运放系统来说，高阻抗极点有两个（每一级放大器各一个），不利于稳定。
+
+通过对第一级电路进行优化可以获得更大的增益：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828192226746.png" alt="image-20230828192226746" style="zoom:50%;" />
+
+​		注：在运放设计时，当输出摆幅范围是V~DD~ - V~OD~ 到 V~OD~ 时，此类运放可以被称作轨对轨运放。
+
+### 9.4 增益的提高
+
+​		A~V~ = g~m~ * r~out~ ；想要提高增益，最好方式就是增大输出电阻r~out~。
+
+​		通过哪种方式增大输出电阻呢？可以采用**电流反馈**的方式实现输出电阻的增大。
+
+- 调节型共源共栅
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828204139757.png" alt="image-20230828204139757" style="zoom:50%;" />
+
+​		注：电路中的r~o1~是一个共源极MOS管的小信号等效。
+
+​		环路增益：其中M~2~管和r~o1~构成的共源共栅等效于一个源极跟随器增益≈ 1，故整体电路的环路增益<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828204537625.png" alt="image-20230828204537625" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828204606352.png" alt="image-20230828204606352" style="zoom:50%;" /> ，由于A~1~ 远大于1，故<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828204724866.png" alt="image-20230828204724866" style="zoom:50%;" />
+
+> 介绍两个电路的不同：直流工作点不同。
+>
+> ​               <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828210549970.png" alt="image-20230828210549970" style="zoom:50%;" />               <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828210609800.png" alt="image-20230828210609800" style="zoom:50%;" />    
+>
+> 电路一：计算M~1~中的电流时不需要知道M~1~的栅极电压，它是一个被动管，其中的电流由R~S~决定，其中R~s~用于产生直流电流，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828210858403.png" alt="image-20230828210858403" style="zoom: 50%;" />
+>
+> 电路二：此结构中的电流大小由偏置管中的电流I~D~决定，M~2~与M~1~共同构成放大器
+
+ <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828212543669.png" alt="image-20230828212543669" style="zoom:50%;" />
 
