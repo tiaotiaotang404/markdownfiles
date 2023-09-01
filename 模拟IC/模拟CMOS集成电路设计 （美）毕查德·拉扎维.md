@@ -1467,3 +1467,251 @@
 
  <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828212543669.png" alt="image-20230828212543669" style="zoom:50%;" />
 
+实际电路实现上述“超级晶体管”：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230829154354536.png" alt="image-20230829154354536" style="zoom: 50%;" />
+
+​		注：可见增益确实增大了，但输出范围减小了（V~X~ = V~OD~ 时不影响输出摆幅）。
+
+​		可以使用PMOS管来增大输出摆幅：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230829160151926.png" alt="image-20230829160151926" style="zoom:50%;" />
+
+> 直接使用PMOS管后，由于V~DD~和P点的压差很大，所以消耗的电流I~1~很大。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830085203255.png" alt="image-20230830085203255" style="zoom:50%;" />
+
+### 9.5 共模反馈（CMFB）
+
+> CMFB的两种类型：
+>
+> 连续时间CMFB（CT-CMFB）：两个电阻即可
+>
+> 开关电容（ST-CMFB）：用时钟信号控制开关开断
+
+- 全差动运放的优缺点：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830092605125.png" alt="image-20230830092605125" style="zoom: 50%;" />
+
+其中对于差动放大器的共模电平的问题，**只有“一山不容二虎”的情况（电路中有两个电流源导致电流冲突，如负载是电流源）下才会需要共模电平和共模反馈**。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830094225626.png" alt="image-20230830094225626" style="zoom:50%;" />
+
+注：差动放大器中的共模是指当输入信号还没有加入差动值，只加了一个共模电平，输出端如何获得一个确定的共模电压。当电路中存在电流冲突时，输出端的共模电压会不稳。
+
+- 通过共模反馈将共模电平固定下来：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830102206142.png" alt="image-20230830102206142" style="zoom:50%;" />
+
+​		注：其中的运放是低增益放大器
+
+共模反馈实现例：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830103922941.png" alt="image-20230830103922941" style="zoom:50%;" />
+
+​		使用两个电阻实现共模电压的检测，但要求两个电阻的阻值很大才可以对差动电路输出影响减小，但阻值一大，电阻的面积就需要很大，不利于集成，故使用两个源跟随器以此减小两个电阻的阻值及面积；新的问题又出现，M~7,8~源随器正常工作允许的V~out1,2~的大小和主电路允许的大小范围不同，即**共模检测电路的差模输入范围和主放大器的差模输出范围不匹配，故导致共模检测出现失真**。
+
+### 9.6 输入范围限制
+
+> 想要扩展输入的范围：使用双折叠
+>
+> 想要扩展输出的范围：使用class-AB
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830110847010.png" alt="image-20230830110847010" style="zoom:50%;" />
+
+### 9.7 转换速率（压摆率）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830112555002.png" alt="image-20230830112555002" style="zoom:50%;" />
+
+​		当输入突然增大，不管输入增大多少，输出会经过相同的时间变化至稳定。
+
+​		对于RC电路来说上面一句话成立，但对于运放来说，情况不同。
+
+1. 输入信号变化较小时，输出呈指数形式增大变化。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830112835580.png" alt="image-20230830112835580" style="zoom:50%;" />
+
+2. 输入信号变化较大时，输出呈线性变化，其中线性的斜率为<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830113053219.png" alt="image-20230830113053219" style="zoom:50%;" />。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830113027399.png" alt="image-20230830113027399" style="zoom:50%;" />
+
+注：例子中当输入变化太大，I~ss~中的电流不够M~1~和M~2~两个管子分配的，故导致输出变化呈线性。
+
+​		一个电路的压摆率限制了可以处理的信号的最大斜率：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830113412432.png" alt="image-20230830113412432" style="zoom:50%;" />
+
+### 9.8 电源抑制
+
+电源抑制就是指电路中电源中的波动到达输出点的增益需要抑制。
+
+电源抑制比 = 从电源上到输出端的小信号增益 / 有用的差模值
+
+## 第10章 稳定性与频率补偿
+
+### 10.1 概述
+
+​		负反馈系统中的稳定性问题：负反馈系统的优点参看第8章开头，负反馈系统的缺点：有可能出现系统不稳定的问题（在运放系统中，不稳定是指将运放接为闭环后，没有输入或输入一个直流，但输出为一个振荡的信号）；有可能产生振荡。
+
+- 不稳定问题在时域中的解释
+
+​		输入为直流时的负反馈：输出是一个被放大了的直流，运放两个输入端的压差（V~in+~ - V~in-~）很小
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830211844524.png" alt="image-20230830211844524" style="zoom:50%;" />
+
+​		输入信号带有频率时的负反馈：只考虑系统输出信号与输入信号直接的相位延迟，可以看出随着输入信号的频率不断增加，相位延迟不断增大，直至某一个频率时会有<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830212357721.png" alt="image-20230830212357721" style="zoom:50%;" />，即负反馈变为正反馈，此时容易产生自激振荡的现象，此时输出会固定在此频率，并且幅值不断增大。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830212244402.png" alt="image-20230830212244402" style="zoom:50%;" />
+
+​		注：
+
+1. 相位延迟 = <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830212555261.png" alt="image-20230830212555261" style="zoom: 33%;" />
+
+2. 并不是只要不输入某个会导致正反馈频率的信号就不会产生正反馈，当运放供电时（输入信号相当于一个方波，含有丰富的各次谐波），输入信号的波动，噪声等因素都可能会产生振荡，导致正反馈。
+
+3. 为啥只有一个<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830212357721.png" alt="image-20230830212357721" style="zoom:50%;" />的延迟，负反馈就可能会直接变为正反馈？因为负反馈的输入输出端为V~in+~ - V~in-~，天生自带一个<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830212357721.png" alt="image-20230830212357721" style="zoom:50%;" />的延迟，再加上特殊频率导致的延迟，共2<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830212357721.png" alt="image-20230830212357721" style="zoom: 33%;" />，所以负反馈直接变为正反馈。
+
+- 不稳定问题在频域中的解释：巴克豪森准则
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831080909645.png" alt="image-20230831080909645" style="zoom:50%;" />
+
+​	系统函数的分母为0，则系统增益无穷大，故当有一个频率的信号输入，使得闭环增益幅值为1，相移180°，就会产生振荡。
+
+> 注：**系统中的β越小，系统越稳定，反馈系统β的最大值为1。**
+
+​		稳定系统和不稳定系统：
+
+​		根据环路增益的波特图判断
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831082550229.png" alt="image-20230831082550229" style="zoom:50%;" />
+
+​		闭环系统的极点与系统稳定性：收敛域包含虚轴（即闭环系统函数的根在虚轴左侧）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831083226953.png" alt="image-20230831083226953" style="zoom:50%;" />
+
+例；<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831083529186.png" alt="image-20230831083529186" style="zoom: 33%;" />单极点系统最大相移为90°，故肯定为稳定系统。
+
+### 10.2 多极点系统
+
+用两极点系统举例：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831085018678.png" alt="image-20230831085018678" style="zoom:50%;" />
+
+结论：
+
+1. 对于多极点系统，采用闭环增益的波特图分析，寻找GX点和PX点进行比较。
+2. 系统的β越小，系统越稳定，最坏的情况（β最大）β = 1
+
+### 10.3 相位裕度
+
+例：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831090058775.png" alt="image-20230831090058775" style="zoom:50%;" />
+
+​		系统相位裕度 = 5°时，闭环增益在频域中出现了peaking现象（峰值现象），低频增益和高频增益不同会导致输出信号失真；在时域中出现ring现象，输出不断振荡，经过一段时间后才稳定下来，降低了系统的响应速度。
+
+> 闭环系统虽然是稳定的，但是由于==相位裕度不够==，导致闭环增益在接近带宽附近会出现了==peaking现象==；在时域出现==ring现象==。
+
+当相位裕度足够时的现象：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831091001989.png" alt="image-20230831091001989" style="zoom:50%;" />
+
+- 相位裕度需要多少合适？
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831092310573.png" alt="image-20230831092310573" style="zoom:50%;" />
+
+​		==**相位裕度范围：63°~72°**==
+
+> 对于一个两极点系统：
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831093055138.png" alt="image-20230831093055138" style="zoom:50%;" />
+
+### 10.4 频率补偿
+
+​		主要就是改变极点频率，目标是达到单极点近似。
+
+- 单端输出的套筒式OTA
+
+频率补偿的方式：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831135106985.png" alt="image-20230831135106985" style="zoom:50%;" />
+
+​		方式一减少极点的个数，极点的个数是由电路结构决定的（一个结点贡献一个极点），故不太容易；方式二通过改变β，实现减小GX，而保持PX不动；方式三移动主极点频率。
+
+> **β越小，信号裕度越大。**
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831135436771.png" alt="image-20230831135436771" style="zoom:50%;" />
+
+> 阻抗经验：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831135856207.png" alt="image-20230831135856207" style="zoom:50%;" />
+>
+> 其中1/g~m~的情况（低电阻结点）：MOS管源极电阻、二极管连接型器件电阻
+>
+> 其中r~o~的情况（高电阻结点）：MOS管漏极电阻、单一电流源
+>
+> **单极运放**：只有一个高电阻结点的运放电路
+
+​                   <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831141307755.png" alt="image-20230831141307755" style="zoom:50%;" />                 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831141340460.png" alt="image-20230831141340460" style="zoom:50%;" />
+
+​		注：主频率极点在输出端（输出端的输出电阻最大）；A极点关联的MOS管最多，故寄生电容最大，故选为次极点。
+
+​		多个极点在GX左侧，系统不稳定，需要进行频率补偿：移动主极点频率实现<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831142327644.png" alt="image-20230831142327644" style="zoom:50%;" />
+
+​		通过增大输出电容C~L~来移动主极点频率，主要依据：波特图中一个极点的斜率为 -20dB/dec。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831142916180.png" alt="image-20230831142916180" style="zoom:50%;" />
+
+​		**先找到次极点的频率，再通过 -20dB/dec的斜率反推出移动后的主极点频率值*ω*~out~'，通过计算得到C~L~’的值。**
+
+> ==如何计算相位裕度：==
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831145330269.png" alt="image-20230831145330269" style="zoom: 33%;" />
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831150003909.png" alt="image-20230831150003909" style="zoom: 67%;" />
+
+- 全差动套筒式OTA
+
+​		频率特性很好，并且比单端输出的OTA更加稳定，速度更快
+
+### 10.5 两级运放的补偿
+
+​		两级运放较难进行频率补偿，例如
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901080209901.png" alt="image-20230901080209901" style="zoom:50%;" />
+
+​		两级运放各贡献一个高阻抗的低频结点，且两个结点频率相近，<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901080322395.png" alt="image-20230901080322395" style="zoom:33%;" />，想要通过加大电容移动主极点频率的方法不可行。
+
+- 米勒补偿：在第二级放大器的输入和输出之间并联跨接一个电容
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901081443357.png" alt="image-20230901081443357" style="zoom:50%;" />
+
+​		结果：第一级的输出结点的频率显著降低（由于米勒补偿的作用，**借助第二级放大器的增益，把第一级放大器输出结点的电容放大**），第二级的输出结点的频率显著增大（即将两个频率相近的结点的频率拉开）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901082716539.png" alt="image-20230901082716539" style="zoom:50%;" />
+
+​		由于增加电容之后多出一条信号通路，故多了一个右半平面的零点。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901083829836.png" alt="image-20230901083829836" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901083924037.png" alt="image-20230901083924037" style="zoom:50%;" />	
+
+​		由于位于右半平面零点的作用，使得相位裕度变为负数，电路不稳定，会产生振荡。
+
+- 如何解决掉由于米勒补偿带来的右半平面的零点？
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901085128939.png" alt="image-20230901085128939" style="zoom:50%;" />
+
+​		给米勒电容串联一个电阻，通过分析，可以通过改变电阻的大小使得零点消失或者移动至左半平面。
+
+> 理论上可以将零点完全抵消，但由于PVT等因素的影响，会导致电路产生波动，计算好的零点抵消可能会变为右半平面的零点，故完全抵消实际不太可行
+
+电阻R~Z~的确定：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901085724204.png" alt="image-20230901085724204" style="zoom:50%;" />
+
+​		方式一不靠谱；方式二将零点移动至左半平面，并减小主极点频率的值。
+
+> 可以使用一个MOS管当作一个压控电阻，更方便准确的调控电阻阻值
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901085952254.png" alt="image-20230901085952254" style="zoom:33%;" />
+
+> 不同负载电容对于一级运放和两级运放的影响：
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901090302287.png" alt="image-20230901090302287" style="zoom:50%;" />
+>
+> 对于一级运放，随着负载电容的不断增大，输出会越来越稳定，但响应时间会越来越长；对于两级运放，随着负载电容的不断增大，输出会越来越不稳定，可能会产生振荡（由于第二级运放的输出结点频率是次极点，随着负载电容不断增大，次极点频率会减小，与主极点频率接近）
+
+==总结：两级运放的设计过程==
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901104917364.png" alt="image-20230901104917364" style="zoom:50%;" />
+
+​		两级运放的主极点是在第一级运放的输出极点，次极点是在第二级运放的输出极点。
