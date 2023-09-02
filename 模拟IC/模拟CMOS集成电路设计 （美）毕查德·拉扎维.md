@@ -70,6 +70,8 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729144948228.png" alt="image-20230729144948228" style="zoom:50%;" />
 
+#### I/V特性总结
+
 > ==总结：==
 >
 > 1，对于MOS管，由于是对称结构，故源极和漏极可以互换；对于NMOS来说谁的电压低谁就是源极，对于PMOS来说谁的电压高谁就是源极。
@@ -110,6 +112,10 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230809194503256.png" alt="image-20230809194503256" style="zoom:50%;" />
 
+#### 跨导总结
+
+> ==总结：==跨导记住这三个公式和图
+
 ### 2.3 二级效应
 
 - 体效应：MOS管的阈值电压将随其源极和衬底之间电位的不同而发生变化
@@ -140,11 +146,17 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729161328814.png" alt="image-20230729161328814" style="zoom:33%;" />
 
-<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230809200907639.png" alt="image-20230809200907639" style="zoom:50%;" />
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902095044695.png" alt="image-20230902095044695" style="zoom:50%;" />
 
-> 沟道长度调制的存在导致I<sub>DS</sub>/V<sub>DS</sub>特性曲线在饱和区出现非零斜率，使D和S之间的电流源非理想。
+​		其中：  <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230809200907639.png" alt="image-20230809200907639" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902095132901.png" alt="image-20230902095132901" style="zoom:50%;" />
+
+> 沟道长度调制的存在导致I<sub>DS</sub>/V<sub>DS</sub>特性曲线在饱和区出现非零斜率，使D和S之间的电流源非理想
 
 > 沟道长度加倍，会使I<sub>D</sub>~V<sub>DS</sub>曲线的斜率减为原来的1/2
+>
+> 即沟道长度越长，沟道长度调制效应越好，输出越理想
 
 - 亚阈值导电性
 
@@ -194,7 +206,11 @@
 2. 在两个端子之间产生一个电压增量而其他端子的电压保持不变
 3. 测量所有端子电流的变化
 
-<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730110228509.png" alt="image-20230730110228509" style="zoom: 50%;" />
+​                                         <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730110228509.png" alt="image-20230730110228509" style="zoom: 50%;" />                                                       
+
+​		输出电阻r~o~：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902101028695.png" alt="image-20230902101028695" style="zoom: 67%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902101040958.png" alt="image-20230902101040958" style="zoom: 80%;" />
+
+​		体跨导：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902101414744.png" alt="image-20230902101414744" style="zoom:50%;" />
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730111126083.png" alt="image-20230730111126083" style="zoom:33%;" />
 
@@ -1715,3 +1731,54 @@
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901104917364.png" alt="image-20230901104917364" style="zoom:50%;" />
 
 ​		两级运放的主极点是在第一级运放的输出极点，次极点是在第二级运放的输出极点。
+
+## 第12章 带隙基准
+
+​		本章目的：CMOS技术中基准产生电路的设计，着重于“带隙”技术。
+
+### 12.1 概述
+
+​		产生基准的目的是建立一个与电源和工艺无关、具有确定温度特性的直流电压或电流。将任务分为两个设计问题：与电源无关的偏置和温度变化关系的确定。
+
+### 12.2 与电源无关的偏置
+
+​		之前使用电流镜时，是通过“复制”的方式将一个“理想的”基准电流输入电路中使用，此时的问题是如何产生这个理想的基准电流？
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902203929297.png" alt="image-20230902203929297" style="zoom:50%;" />
+
+​		通过用一个电阻作为近似电流源，但输出电流对V~DD~很敏感：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902204123136.png" alt="image-20230902204123136" style="zoom:50%;" />
+
+​		目前的想法是消除对V~DD~的敏感，假定电路必须要自己偏置（即**I~ref~需通过某种方式从I~out~得到**）：如果I~out~最终与V~DD~无关，那么I~ref~就可以是I~out~的一个复制。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902205615382.png" alt="image-20230902205615382" style="zoom:50%;" />
+
+​		通过两个PMOS管将I~out~复制成为I~ref~，
+
+​		注：每个二极管连接型器件都是由一个电流源驱动，故相对来说I~out~和I~ref~与V~DD~无关
+
+### 12.3 与温度无关的基准
+
+​		如何产生一个对温度变化保持恒定的量？将两个具有相反温度系数的量以适当的权重相加，结果就会显示出零温度系数。
+
+​		双极晶体管的特性参数具有良好的重复性，并具有提供正温度系数和负温度系数的、严格定义的量。
+
+- 负温度系数电压
+
+​		双极性晶体管的基极-发射极电压，或者说pn结二极管的正向电压具有负温度系数。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902211533323.png" alt="image-20230902211533323" style="zoom: 50%;" />
+
+​		V~BE~的温度系数本身与温度有关，如果正温度系数的量表现出一个固定的温度系数，那么在恒定基准的产生电路中就会产生误差。
+
+- 正温度系数电压
+
+​		当两个双极性晶体管工作在不同的电流密度下，他们的基极-发射极电压的差值就与绝对温度成正比。
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902212100902.png" alt="image-20230902212100902" style="zoom:50%;" />
+
+​		                                          <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902212156254.png" alt="image-20230902212156254" style="zoom:50%;" />                     <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902212210143.png" alt="image-20230902212210143" style="zoom: 67%;" />
+
+​		此温度系数与温度或集电极电流的特性无关。
+
+- 带隙基准
+
