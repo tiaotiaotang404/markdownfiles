@@ -93,6 +93,8 @@
 > ​							 固定V<sub>G</sub>的值，随着V<sub>DS</sub>的增大，管子先进入线性区，随后进入饱和区；
 >
 > <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828105406424.png" alt="image-20230828105406424" style="zoom:50%;" />
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230919214542780.png" alt="image-20230919214542780" style="zoom: 80%;" />
 
 - MOSFET的跨导
 
@@ -130,7 +132,7 @@
 
 ​		其中<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230729155741035.png" alt="image-20230729155741035" style="zoom:25%;" />称为体效应系数，V<sub>SB</sub>是源衬电势差。γ的典型值在0.3V<sup>1/2</sup>到0.4V<sup>1/2</sup>之间。
 
-​		产生体效应，并不需要改变衬底电势V<sub>sub</sub>：源电压相对于V<sub>sub</sub>发生改变，会产生同样的现象。
+​		产生体效应，并不需要改变衬底电势V<sub>sub</sub>：源电压相对于V<sub>sub</sub>发生改变，会产生同样的现象（即**V~BS~改变就会导致V~TH~变化**）。
 
 例如：
 
@@ -141,6 +143,8 @@
 > 体效应的存在会导致阈值电压的改变
 
 - 沟道长度调制
+
+​		沟道长度调制效应是指MOS晶体管中，栅下沟道预夹断后、若继续增大Vds，夹断点会略向源极方向移动。导致夹断点到源极之间的沟道长度略有减小，有效沟道电阻也就略有减小，从而使更多电子自源极漂移到夹断点，导致在耗尽区漂移电子增多，使Id增大的效应。
 
 ​		**此效应发生在饱和区**，沟道长度L`是V<sub>DS</sub>的函数（从式2.13可得）。
 
@@ -163,6 +167,10 @@
 ​		V<sub>GS</sub> ≈ V<sub>TH</sub>时，器件不会突然关断，一个“弱”的反型层仍然存在，甚至当V<sub>GS</sub> < V<sub>TH</sub>时，I<sub>D</sub>也并非无限小，而是与V<sub>GS</sub>呈指数关系。
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730090545296.png" alt="image-20230730090545296" style="zoom:50%;" />
+
+##### 二级效应总结：
+
+> ==二级效应总结：当MOS管的V~DS~变化时，需要考虑沟道长度调制效应；当MOS管的V~BS~变化时，需要考虑体效应。==
 
 ### 2.4 小信号模型
 
@@ -212,6 +220,8 @@
 
 ​		体跨导：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230902101414744.png" alt="image-20230902101414744" style="zoom:50%;" />
 
+![image-20230913102559319](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230913102559319.png)
+
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730111126083.png" alt="image-20230730111126083" style="zoom:33%;" />
 
 ### 2.5 SPICE模型
@@ -232,7 +242,7 @@
 
 #### 3.3.1 采用电阻作负载的共源极
 
-<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811093944173.png" alt="image-20230811093944173" style="zoom: 50%;" />
+![image-20230906100624223](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230906100624223.png)
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811140633928.png" alt="image-20230811140633928" style="zoom: 33%;" />
 
@@ -242,7 +252,7 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811142114517.png" alt="image-20230811142114517" style="zoom:50%;" />
 
-​		随着输入电压的不断增大，MOS管先进入饱和区，再进入线性区；输出的漏极电流I<sub>D</sub>不断增大，而跨导在饱和区时不断线性增大至最大值<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811142531443.png" alt="image-20230811142531443" style="zoom:25%;" />，随后进入线性区后开始减小<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811142601530.png" alt="image-20230811142601530" style="zoom:25%;" />，即在线性区随着输入电压的增大管子对于电流的控制能力是越来越弱的。
+​		随着输入电压的不断增大，MOS管先进入饱和区，再进入线性区；输出的漏极电流I<sub>D</sub>不断增大，而跨导在饱和区时不断线性增大至最大值<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811142531443.png" alt="image-20230811142531443" style="zoom:25%;" />，随后进入线性区后开始减小<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230811142601530.png" alt="image-20230811142601530" style="zoom:25%;" />，即**在线性区随着输入电压的增大管子对于电流的控制能力是越来越弱的**。
 
 #### 3.3.2 采用二极管连接型器件作负载的共源极
 
@@ -276,6 +286,8 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812093056101.png" alt="image-20230812093056101" style="zoom:50%;" />
 
+其中：![image-20230913102651249](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230913102651249.png)
+
 ​		得出结论：二极管连接型器件等效为1/g<sub>m</sub>的电阻（不考虑体效应）（1/g<sub>m</sub>一般为几十kΩ，r<sub>o</sub>一般小于1kΩ，故两者并联时r<sub>o</sub>可忽略）
 
 ​		随后分析两管：
@@ -288,7 +300,7 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812100617232.png" alt="image-20230812100617232" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812100654009.png" alt="image-20230812100654009" style="zoom:50%;" />
 
-​		**两个NMOS连接时，电路的增益和输出电阻大小会受到体效应的影响，而当两个不同类型的管子连接时（PMOS的衬底连接V<sub>DD</sub>）不会受到体效应的影响。**
+​		**两个NMOS连接时，电路的增益和输出电阻大小会受到体效应的影响，PMOS二极管负载时体效应消失（PMOS的源极直接接在了V~DD~上，故V~BS~不变，体效应影响消失）**
 
 #### 3.3.3 采用电流源作负载的共源极
 
@@ -296,7 +308,7 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230812103802914.png" alt="image-20230812103802914" style="zoom:50%;" />
 
-注1：M<sub>1</sub>和M<sub>2</sub>的类型不同，如果两者是相同类型的管子，会受到体效应的影响。
+注1：M<sub>1</sub>和M<sub>2</sub>的类型不同，如果两者都是NMOS管，会受到体效应的影响。
 
 注2：M<sub>2</sub>的栅极输入为直流电压V<sub>B</sub>，源极输入为直流电压V<sub>DD</sub>，对于小信号来说均为“地”，故M<sub>2</sub>小信号等效模型为一个电阻（v<sub>gs</sub> = 0，压控电流源为0）
 
@@ -342,6 +354,10 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814112851912.png" alt="image-20230814112851912" style="zoom:50%;" />
 
+> 共源极总结：
+>
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230906111223841.png" alt="image-20230906111223841" style="zoom:50%;" />
+
 
 
 ### 3.4 源跟随器
@@ -358,7 +374,9 @@
 
 - 根据小信号模型计算可得：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814114801620.png" alt="image-20230814114801620" style="zoom: 33%;" />，小于1。
 
-​		为了解决电流变化的问题，选择使用电流源替换电阻R<sub>S</sub>。
+​		注：V~bs~就是 -V~out~，V~in~ - V~1~ = V~out~
+
+​		为了解决电流变化的问题，选择使用电流源替换电阻R<sub>S</sub>（电流源内阻无穷大）。
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230814115708089.png" alt="image-20230814115708089" style="zoom: 33%;" />
 
@@ -479,7 +497,7 @@
 
 ​		物理意义：当输入的差模信号 -V<sub>in,diff1</sub> ≤ V<sub>in,diff</sub> ≤ V<sub>in,diff1</sub>时，跨导不为零，而当V<sub>in,diff</sub> > |V<sub>in,diff1</sub>|时，只有一个管子导通，电路失去控制作用。
 
-结论：有效差模信号的输入范围为
+结论：**有效差模信号的输入范围为**
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230816080610528.png" alt="image-20230816080610528" style="zoom:50%;" />
 
@@ -562,7 +580,7 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817094819113.png" alt="image-20230817094819113" style="zoom:33%;" />
 
-得到实际情况中共模输入时差模增益为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817094916417.png" alt="image-20230817094916417" style="zoom:33%;" />，越好越好，希望为0。
+得到实际情况中共模输入时差模增益为：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817094916417.png" alt="image-20230817094916417" style="zoom:33%;" />，越小越好，希望为0。
 
 共模抑制比**CMRR**：![image-20230817095939535](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230817095939535.png)
 
@@ -656,6 +674,8 @@
 
 ​                                             <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818214928420.png" alt="image-20230818214928420" style="zoom: 50%;" />，M<sub>2</sub>的漏极直接连接至M<sub>1</sub>的栅极，V<sub>X</sub> = V<sub>GS1</sub>。
 
+注：上电后，M~2~导通，但由于M~1~截止，所以M~2~电流为零。由于M<sub>1</sub>截止，故电流无法流通，只能通过导线流至M<sub>1</sub>的栅极，由于栅极对地有一个电容，随着栅极流入的电流越来越多，不断给电容进行充电，导致M<sub>1</sub>的栅极电压不断增大，最后使得M<sub>1</sub>导通。
+
 如何设置V<sub>b</sub>：          <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818215340957.png" alt="image-20230818215340957" style="zoom:50%;" />
 
 得到V<sub>b</sub>范围：           <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230818215434577.png" alt="image-20230818215434577" style="zoom:33%;" />
@@ -697,6 +717,10 @@
 ​                  <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819094719964.png" alt="image-20230819094719964" style="zoom:50%;" />        其中M<sub>5</sub>也可以用两个管子串联的形式表示：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230819093314965.png" alt="image-20230819093314965" style="zoom:50%;" />
 
 优点：由于输出电压由管子的尺寸比决定，故准确度高。
+
+##### 电流镜总结：
+
+> ![image-20230911191242031](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230911191242031.png)
 
 ### 5.3 有源电流镜
 

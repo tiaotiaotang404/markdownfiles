@@ -1,4 +1,4 @@
-# 第一章：基本电路分析方法
+#  第一章：基本电路分析方法
 
 ## 一，MOS场效应管模型
 
@@ -235,4 +235,98 @@
 ![image-20230731103313460](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230731103313460.png)
 
 # 第二章：电流镜和差动放大器的设计仿真
+
+### 一，单极放大器的设计仿真
+
+#### 电路分析思路：
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916185244707.png" alt="image-20230916185244707" style="zoom:50%;" />
+
+#### 1，共源放大器（电阻负载）
+
+##### 		忽略沟道调制效应：
+
+##### 		1）直流分析
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916185824865.png" alt="image-20230916185824865" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916190018533.png" alt="image-20230916190018533" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916190051210.png" alt="image-20230916190051210" style="zoom:50%;" />
+
+##### 得到输入输出关系，判定放大器的工作范围（饱和区）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916190206813.png" alt="image-20230916190206813" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916190718821.png" alt="image-20230916190718821" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916190934164.png" alt="image-20230916190934164" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916191007757.png" alt="image-20230916191007757" style="zoom: 50%;" />
+
+##### 确定合适的直流工作点（直流工作点的确定与电路的输入输出摆幅直接相关）
+
+##### 2）交流小信号分析
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916191947781.png" alt="image-20230916191947781" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916192241173.png" alt="image-20230916192241173" style="zoom:50%;" />
+
+##### 		考虑沟道调制效应：
+
+##### 		1）直流分析
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916192441778.png" alt="image-20230916192441778" style="zoom:50%;" />
+
+##### 		2）交流分析
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916192537906.png" alt="image-20230916192537906" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916192638766.png" alt="image-20230916192638766" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916192728485.png" alt="image-20230916192728485" style="zoom:50%;" />
+
+###### 输入输出特性仿真：
+
+```fortran
+CS(R-load)_vi&vo
+.OPTION POST
+.PROTECT
+.LIB "l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+M1 Vo Vi 0 0 n_12_lprvt w=2u l=0.6u
+R0 vdd Vo 10k
+vdd vdd 0.5
+v1 vi 0 1.2
+.op
+.dc v1 0.5 0.1
+.print dc v(Vo)
+.end
+```
+
+```bash
+55lp_mm_v0131.lib:
+1,模型列表 model list
+2，corner model
+3，模型使用举例
+* model usage
+*  1. use .lib statements to include sections from the library corresponding to the devices to be simulated.
+*     .lib "modelfilename.lib" sectionname
+*     for example, if the model n_12_lprvt will be used, one of its corresponding corner sections need
+*     to be included (tt_lp_rvt12, ss_lp_rvt12, ff_lp_rvt12, snfp_lp_rvt12, or fnsp_lp_rvt12).
+*     example: .lib "l55lp_mm_v0131.lib" tt_lp_rvt12
+*  2. define devices to be simulated.
+*     example: m1 d g s b n_12_lprvt w=w l=l as=as ad=ad ps=ps pd=pd
+*              + nf=nf dtemp=dtemp sa=sa sb=sb sd=sd sca=sca scb=scb scc=scc
+* tt:   typical n-ch mosfet and typical p-ch mosfet
+* ff:   fast n-ch mosfet and fast p-ch mosfet
+* ss:   slow n-ch mosfet and slow p-ch mosfet
+* fnsp: fast n-ch mosfet and slow p-ch mosfet
+* snfp: slow n-ch mosfet and fast p-ch mosfet
+* tt_tn:   typical n-ch mosfet and typical p-ch mosfet with thermal noise enhancement
+* ff_tn:   fast n-ch mosfet and fast p-ch mosfet with thermal noise enhancement
+* ss_tn:   slow n-ch mosfet and slow p-ch mosfet with thermal noise enhancement
+* fnsp_tn: fast n-ch mosfet and slow p-ch mosfet with thermal noise enhancement
+* snfp_tn: slow n-ch mosfet and fast p-ch mosfet with thermal noise enhancement
+```
 
