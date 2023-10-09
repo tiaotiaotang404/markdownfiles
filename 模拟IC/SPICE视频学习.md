@@ -270,6 +270,8 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916191947781.png" alt="image-20230916191947781" style="zoom:50%;" />
 
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230930193955849.png" alt="image-20230930193955849" style="zoom:50%;" />
+
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916192241173.png" alt="image-20230916192241173" style="zoom:50%;" />
 
 ##### 		考虑沟道调制效应：
@@ -286,20 +288,22 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230916192728485.png" alt="image-20230916192728485" style="zoom:50%;" />
 
-###### 输入输出特性仿真：
+###### 共源放大器（电阻负载）输入输出特性仿真：
+
+- 直流分析
 
 ```fortran
 CS(R-load)_vi&vo
 .OPTION POST
 .PROTECT
-.LIB "l55lp_mm_v0131.lib" tt_lp_rvt12
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
 .UNPROTECT
 M1 Vo Vi 0 0 n_12_lprvt w=2u l=0.6u
 R0 vdd Vo 10k
-vdd vdd 0.5
+vdd vdd 0 5
 v1 vi 0 1.2
 .op
-.dc v1 0.5 0.1
+.dc v1 0 5 0.1
 .print dc v(Vo)
 .end
 ```
@@ -328,5 +332,303 @@ v1 vi 0 1.2
 * ss_tn:   slow n-ch mosfet and slow p-ch mosfet with thermal noise enhancement
 * fnsp_tn: fast n-ch mosfet and slow p-ch mosfet with thermal noise enhancement
 * snfp_tn: slow n-ch mosfet and fast p-ch mosfet with thermal noise enhancement
+```
+
+仿真结果：vi（绿色），vo（黄色）
+
+![image-20230930200640664](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230930200640664.png)
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230930201014469.png" alt="image-20230930201014469" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230930212317927.png" alt="image-20230930212317927" style="zoom:50%;" />
+
+> 当输入电压大于4.8V时，管子仍处于线性区，但输出电压开始增大，MOS管的I~D~电流开始增大，原因未知
+
+###### 参数分析三种方法：
+
+不同负载下的输入输出特性（参数扫描方法）
+
+```fortran
+CS(R-load)_vi&vo_param
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+.param rload=10k
+M1 Vo Vi 0 0 n_12_lprvt w=2u l=0.6u
+R0 vdd Vo rload
+vdd vdd 0 5
+v1 vi 0 1.2
+.op
+.dc v1 0 4.5 0.1 sweep rload 5k 10k 1k
+.probe dc v(Vo) deriv('v(Vo)')
+.end
+```
+
+![image-20230930215218370](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230930215218370.png)
+
+不同负载下的输入输出特性（参数列表方法）
+
+```fortran
+CS(R-load)_vi&vo_param
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+.param rload=10k
+M1 Vo Vi 0 0 n_12_lprvt w=2u l=0.6u
+R0 vdd Vo rload
+vdd vdd 0 5
+v1 vi 0 1.2
+
+.data rload_table
+rload
+5k
+7k
+10k
+.enddata
+
+.op
+.dc v1 0 4.5 0.1 sweep data=rload_table
+.probe dc v(Vo) deriv('v(Vo)')
+.end
+```
+
+不同负载下的输入输出特性（参数点方法）
+
+```fortran
+CS(R-load)_vi&vo_param
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+.param rload=10k
+M1 Vo Vi 0 0 n_12_lprvt w=2u l=0.6u
+R0 vdd Vo rload
+vdd vdd 0 5
+v1 vi 0 1.2
+.op
+.dc v1 0 4.5 0.1 sweep rload POI 5k 10k 20k
+.probe dc v(Vo) deriv('v(Vo)')
+.end
+```
+
+- 交流分析
+
+```fortran
+CS(R-load)_ac
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+.param rload=10k
+M1 Vo Vi 0 0 n_12_lprvt w=2u l=0.6u
+R0 vdd Vo rload
+vdd vdd 0 5
+v1 vi 0 1.2 ac 1
+
+.op
+.ac dec 10 10 10G sweep rload 10k 100k 20k
+.print ac vdb(Vo) vp(Vo)
+*.dc v1 0 4.5 0.1 sweep rload POI 5k 10k 20k
+*.probe dc v(Vo) deriv('v(Vo)')
+.end
+```
+
+### 2，共源放大器（二极管连接负载）
+
+- NMOS二极管连接负载
+
+```fortran
+CS(ndiode-load)_vi&vo
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+M1 Vo Vi 0 0 n_12_lprvt w=10u l=0.6u
+M2 vdd vdd Vo 0 n_12_lprvt w=2u l=0.6u
+vdd vdd 0 3.3
+v1 vi 0 1.2
+.op
+.dc v1 0 3.3 0.1
+.print dc v(Vo)
+.end
+```
+
+![image-20231002110315786](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002110315786.png)
+
+![image-20231002110511514](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002110511514.png)
+
+```fortran
+CS(ndiode-load)_vi&vo
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+M1 Vo Vi 0 0 n_12_lprvt w=10u l=0.6u
+M2 Vo Vo vdd vdd p_12_lprvt w=2u l=0.6u
+vdd vdd 0 3.3
+v1 vi 0 1.2
+.op
+.dc v1 0 3.3 0.1
+.print dc v(Vo)
+.end
+```
+
+![image-20231002113751223](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002113751223.png)
+
+![image-20231002113824636](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002113824636.png)
+
+- 参数扫描
+
+```fortran
+CS(ndiode-load)_vi&vo
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+.param w1=10u
+M1 Vo Vi 0 0 n_12_lprvt w=w1 l=0.6u
+M2 Vo Vo vdd vdd p_12_lprvt w=2u l=0.6u
+vdd vdd 0 3.3
+v1 vi 0 1.2
+.op
+.dc v1 0 3.3 0.1 sweep w1 2u 10u 2u
+.print dc v(Vo)
+.end
+```
+
+![image-20231002114754010](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002114754010.png)
+
+- 交流分析
+
+```fortran
+CS(ndiode-load)_ac
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+.param w1=10u
+M1 Vo Vi 0 0 n_12_lprvt w=w1 l=0.6u
+M2 Vo Vo vdd vdd p_12_lprvt w=2u l=0.6u
+vdd vdd 0 3.3
+v1 vi 0 1.2 ac 1
+.op
+.ac dec 10 10 10G sweep w1 2u 10u 2u
+*.dc v1 0 3.3 0.1 sweep w1 2u 10u 2u
+.print ac vdb(Vo) vp(Vo)
+.end
+```
+
+![image-20231002120049395](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002120049395.png)
+
+### 3，共源放大器（电流源负载）
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002183606348.png" alt="image-20231002183606348" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002183642699.png" alt="image-20231002183642699" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002183707553.png" alt="image-20231002183707553" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002190610851.png" alt="image-20231002190610851" style="zoom:50%;" />
+
+### 4，共栅极
+
+- 直流分析
+
+```fortran
+CG_vi&vo
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+M1 Vo vb Vi 0 n_12_lprvt w=2u l=0.6u
+R0 vdd Vo 50k
+vdd vdd 0 3.3
+vb vb 0 2
+v1 vi 0 1.2
+.op
+.dc v1 0 3.3 0.1 sweep vb 2 4 0.5
+.print dc v(Vo)
+.end
+```
+
+![image-20231002194759345](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002194759345.png)
+
+- 交流分析
+
+```fortran
+CG_ac
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+M1 Vo vb Vi 0 n_12_lprvt w=2u l=0.6u
+R0 vdd Vo rload
+vdd vdd 0 3.3
+vb vb 0 2
+v1 vi 0 1.2 ac 1
+.op
+.ac dec 10 10 50G sweep rload 10k 100k 20k
+*.dc v1 0 3.3 0.1 sweep vb 2 4 0.5
+.print ac vdb(Vo) vp(Vo)
+.end
+```
+
+![image-20231002200602508](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002200602508.png)
+
+- 输入输出阻抗仿真
+
+```fortran
+CG_ri_ro
+.OPTION POST
+.PROTECT
+.LIB "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+M1 Vo vb Vi 0 n_12_lprvt w=2u l=0.6u
+R0 vdd Vo rload
+vdd vdd 0 3.3
+vb vb 0 2
+v1 vi 0 1.2
+.op
+.dc rload 10k 100k 20k
+.tt v(Vo) v1
+.end
+```
+
+> .tt 在直流分析基础上进行传输特性分析，即求电路的传输，输入输出电阻
+
+![image-20231002202733737](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231002202733737.png)
+
+### 5，模型参数提取
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231003103043789.png" alt="image-20231003103043789" style="zoom:50%;" />
+
+```fortran
+*NMOS I-V Characteristic
+.OPTIONS POST
+.PROTECT
+.lib "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+.param IDS=1mA Ln=1u Wn="2*Ln" 
+M1 1 1 0 0 n_12_lprvt  W=Wn L=Ln 
+I1 VDD 1 IDS  
+V1 VDD 0 3.3V
+.OP
+.DC IDS 1u 100u 1u SWEEP Ln POI 9 55n 100n 110n 165n 200n 220n 275n 330n 400n 
+.PRINT vth=par('LV9(M1)') vgs=par('LX2(M1)') 
+.PRINT gm=par('LX7(M1)') gds=par('LX8(M1)') 
+.PRINT KN=par("gm/(vgs-vth)/(Wn/Ln)")
+.PRINT Weff=par('LV2(M1)') Leff=par('LV1(M1)')
+.PRINT KN2=par("gm/(vgs-vth)/(Weff/Leff)")
+.PRINT KN3=par("LV21(M1)/(Wn/Ln)")
+.PRINT LAMBDA=par("gds/LX4(M1)")
+.PRINT GAMMA=par("LV22(M1)")
+.PRINT dc id(M1) V(1)
+*.ac dec 10 1k 200meg 
+*.DC VIN 0 5 0.01
+*.PRINT AC VP(VOUT) VDB(VOUT)
+*.PRINT dc V(VOUT)
+.END 
 ```
 

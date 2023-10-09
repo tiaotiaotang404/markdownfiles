@@ -189,3 +189,78 @@ VIN 1 0 PWL(0 0V 1U 0V 1.05U 3V 3U 3V 3.05U 0V 6U 0V)
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230914142747341.png" alt="image-20230914142747341" style="zoom:50%;" />
 
+##### 艾伦4.1-1
+
+```fortran
+ALLEN 4.1-1
+*circuit description
+M1 1 2 3 0 MOS1 W=10U L=1.0U
+V1 3 1 DC 2.5
+VD 1 0 DC 2.5
+VG 2 0 DC 5
+*circuit control
+.OPTION LIST NOSD POST
+.MODEL MOS1 NMOS VTO=0.7 KP=110U GAMMA=0.4 LAMBDA=0.04 PHI=0.7
+.DC VG 0 5 1 V1 -2.5 2.5 0.1 *直流扫描
+.END
+```
+
+差分对仿真：
+
+```fortran
+S I-V Characteristic
+.OPTIONS LIST NODE POST
+.PROTECT
+.lib "/home/PDK/UMK55FDKLPC00000OA_A10_PB/Models/Hspice/l55lp_mm_v0131.lib" tt_lp_rvt12
+.UNPROTECT
+.INCLUDE 'diff-pair.net'
+X1 IS VDD VIN1 VIN2 VOUT Difference-pair
+I1 VDD IS 150U
+VIN1 VIN1 0 850mV
+VIN2 VIN2 0 850mV ac 150mV
+VDD VDD 0 1.2
+.OP
+.ac dec 10 1k 10MEG
+*.DC VIN1 0 5 0.01
+.PRINT AC VP(VOUT) VDB(VOUT)
+*.PRINT dc V(VOUT1)
+.END
+
+```
+
+```fortran
+.SUBCKT Difference-pair IS VDD VIN1 VIN2 VOUT
+*.PININFO IS:I VDD:I VIN1:I VIN2:I VOUT:O
+MNM3 VOUT VIN2 net8 gnd! N_12_LPRVT W=1100n L=220n M=1
+MNM2 net19 VIN1 net8 gnd! N_12_LPRVT W=1100n L=220n M=1
+MNM1 IS IS gnd! gnd! N_12_LPRVT W=11216n L=220n M=1
+MNM0 net8 IS gnd! gnd! N_12_LPRVT W=11216n L=220n M=1
+MPM1 VOUT net19 VDD VDD P_12_LPRVT W=2392n L=220n M=1
+MPM0 net19 net19 VDD VDD P_12_LPRVT W=2392n L=220n M=1
+CC0 VOUT gnd! 5p $[CP]
+.ENDS
+
+```
+
+![image-20231008082954982](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231008082954982.png)
+
+![image-20231008084120306](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231008084120306.png)
+
+
+
+![image-20231008085904566](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231008085904566.png)
+
+```
+.SUBCKT Difference-pair IS VDD VIN1 VIN2 VOUT
+*.PININFO IS:I VDD:I VIN1:I VIN2:I VOUT:O
+MNM3 VOUT VIN2 net8 gnd! N_12_LPRVT W=35200n L=7040n M=1
+MNM2 net19 VIN1 net8 gnd! N_12_LPRVT W=35200n L=7040n M=1
+MNM1 IS IS gnd! gnd! N_12_LPRVT W=2804n L=55n M=1
+MNM0 net8 IS gnd! gnd! N_12_LPRVT W=2804n L=55n M=1
+MPM1 VOUT net19 VDD VDD P_12_LPRVT W=76800n L=7040n M=1
+MPM0 net19 net19 VDD VDD P_12_LPRVT W=76800n L=7040n M=1
+CC0 VOUT gnd! 5p $[CP]
+.ENDS
+
+```
+

@@ -441,6 +441,8 @@
 
 结论：共源共栅级电路的本征增益是共源放大器的平方；**共源共栅是实现高增益的基础**。
 
+> 共源共栅可以实现高增益的原因：r~o1~与M~2~之间的负反馈
+
 ## 第4章 差动放大器
 
 ​		本章目的：CMOS差动放大器的分析和设计
@@ -722,7 +724,7 @@
 
 > ![image-20230911191242031](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230911191242031.png)
 
-### 5.3 有源电流镜
+### 5.3 有源电流镜（五管单元）
 
 ​		将电流镜作为差动对的负载得到有源电流镜，**是一个放大器**。
 
@@ -1115,13 +1117,19 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825144948770.png" alt="image-20230825144948770" style="zoom:50%;" />
 
-注：（1）闭环增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145112542.png" alt="image-20230825145112542" style="zoom:50%;" />= ![image-20230826101001126](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826101001126.png)，代表放大器增益的大小
+注：（1）闭环增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145112542.png" alt="image-20230825145112542" style="zoom:50%;" />= <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230921163658105.png" alt="image-20230921163658105" style="zoom:50%;" />，代表放大器增益的大小
 
 ​		（2）开环增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145147509.png" alt="image-20230825145147509" style="zoom:50%;" /> = A~0~
 
 ​		（3）**环路增益：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825145224947.png" alt="image-20230825145224947" style="zoom:50%;" /> = A~0~ * β**，==**决定增益的精度**==
 
 ​		（4）H(S) 处理的信号依然是小信号（由于整个电路的输入信号和反馈回来的信号均为大信号，两者做差输入放大器时依然为小信号）
+
+> 开环增益求解：将电路的反馈通路打断，将断点接固定电位（一般为地），再求V~out~/V~in~即为开环增益
+
+> 环路增益求解：**输入端接地**，将电路的反馈通路打断得到两个断点，在断点处接电压源V~t~，另一个断点处为V~f~，再求V~t~/V~f~即为环路增益
+
+> 闭环增益求解：将计算得到的开环增益和环路增益代入<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230921163658105.png" alt="image-20230921163658105" style="zoom:50%;" />，即可得到
 
 - 反馈电路的特性：
 
@@ -1131,7 +1139,7 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825150905117.png" alt="image-20230825150905117" style="zoom:50%;" />
 
-注：A 很大但对于环境因素比较敏感；A~CL~对于环境不太敏感。
+注：A 很大但对于环境因素比较敏感；A~CL~（即闭环增益）对于环境不太敏感。
 
 > ==如何求环路增益==：
 >
@@ -1139,17 +1147,19 @@
 >
 > （1）输入接小信号地
 >
-> （2）对于理想模型，在任意一点断开，并接入一个电压源V~t~，此时<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825151715767.png" alt="image-20230825151715767" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825151736678.png" alt="image-20230825151736678" style="zoom:50%;" />
+> （2）对于理想模型，在任意一点断开，并接入一个电压源V~t~，此时的环路增益 = V~f~/V~t~<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825151715767.png" alt="image-20230825151715767" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825151736678.png" alt="image-20230825151736678" style="zoom:50%;" />
+>
+> 主要难点：找到实际电路中的放大电路（A）和反馈电路（β）
 
 2. 终端阻抗的变化：
 
-例：  （求输入电阻）                          <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825163633689.png" alt="image-20230825163633689" style="zoom:50%;" />
+例：  （输入电阻）                          <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825163633689.png" alt="image-20230825163633689" style="zoom:50%;" />
 
 求开环输入电阻：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825163711023.png" alt="image-20230825163711023" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825163734247.png" alt="image-20230825163734247" style="zoom:50%;" />
 
 求闭环输入电阻：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825163803616.png" alt="image-20230825163803616" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825164846369.png" alt="image-20230825164846369" style="zoom:50%;" />
 
-例：（求输出电阻）<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825164336612.png" alt="image-20230825164336612" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825164444085.png" alt="image-20230825164444085" style="zoom:50%;" />
+例：（输出电阻）<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825164336612.png" alt="image-20230825164336612" style="zoom:50%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825164444085.png" alt="image-20230825164444085" style="zoom:50%;" />
 
 ![image-20230825164738261](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825164738261.png)
 
@@ -1165,7 +1175,7 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825165855230.png" alt="image-20230825165855230" style="zoom:50%;" />
 
-4. 反馈改变速度
+反馈改变速度
 
 例：将一个20MHz的矩形波增益100倍
 
@@ -1181,21 +1191,25 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825171559647.png" alt="image-20230825171559647" style="zoom:50%;" />
 
-5. 抑制非线性：开环放大器的非线性很严重，闭环后改善非线性，并有“虚短”的现象（可以通过检测放大器输入端两个电压的大小是否相等（即虚短）来判断放大器是否正常工作）。
+4. 抑制非线性：开环放大器的非线性很严重，闭环后改善非线性，并有“虚短”的现象（可以通过检测放大器输入端两个电压的大小是否相等（即虚短）来判断放大器是否正常工作）。
 
 - 放大器的种类：
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825190417130.png" alt="image-20230825190417130" style="zoom:50%;" />
 
-<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825190257741.png" alt="image-20230825190257741" style="zoom:50%;" />
+> 电压入：输入端阻抗很高；电流入：输入端阻抗很低；
+>
+> 电压出：输出端内阻很低；电流出：输出端内阻很高；
 
-电压相加：差动对（两个输入信号相减）；利用V~GS~（V~GS~ = V~G~ - V~S~）
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825190257741.png" alt="image-20230825190257741" style="zoom:50%;" />
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825214249502.png" alt="image-20230825214249502" style="zoom:50%;" />
 
+> 电压相加：差动对（两个输入信号相减）；利用V~GS~（V~GS~ = V~G~ - V~S~）
+
 ### 8.2 反馈结构
 
-1. VVF：（输出电压，反馈电压）
+1. VVF：（放大电路的输出为电压，反馈电路的输出为电压）
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230825214825509.png" alt="image-20230825214825509" style="zoom: 50%;" />
 
@@ -1213,7 +1227,9 @@
 
 >结论：对于VVF，对输入电阻是增加，对输出电阻是减小（增加或减小的倍数都是（![image-20230826102919514](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826102919514.png)）倍数)；判断反馈类型，求解环路增益。
 
-2. CVF：（输出电流，反馈电压）
+> 对于VVF的闭环输入输出电阻的变化：==**好上加好**==（闭环输入电阻更大，闭环输出电阻更小）
+
+2. CVF：（放大电路的输出为电流，反馈电路的输出为电压）
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826103107481.png" alt="image-20230826103107481" style="zoom:50%;" />
 
@@ -1266,6 +1282,8 @@
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230826113233217.png" alt="image-20230826113233217" style="zoom:50%;" />
 
 ### 8.3 反馈对噪声的影响
+
+​		反馈对噪声的改善不大。
 
 ### 8.4 反馈分析的困难
 
@@ -1337,7 +1355,11 @@
 
 ​		注：其中OTA输出电阻大，适合用作电流输出型放大器，但实际应用也有将其作为电压输出型，只用接一个比内阻大的多的负载即可实现（例如OTA常作为电压输出型驱动MOS管的栅极，栅极的输入阻抗理论上是无穷大的）。
 
-> **放大器电压输出型和电流输出型的区别与联系：**当放大器的内阻r~o~较小时（即外接的R~L~ >> r~O~）适合使用电压输出型（电阻串联分压），当放大器的内阻r~o~较大时（即外接的R~L~ << r~O~）适合使用电流输出型（电阻并联分流）
+> Opamp，运算放大器，电压输出型，输出电阻为0；
+>
+> OTA，跨导放大器，电流输出型，输出电阻为∞。
+
+> **放大器电压输出型和电流输出型的区别与联系：**当放大器的内阻r~o~较小时（即外接的R~L~ >> r~O~）适合使用电压输出型（电阻串联分压），当放大器的内阻r~o~较 大时（即外接的R~L~ << r~O~）适合使用电流输出型（电阻并联分流）
 >
 > ![image-20230827191534266](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230827191534266.png)
 
@@ -1417,13 +1439,21 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828112545798.png" alt="image-20230828112545798" style="zoom: 50%;" />
 
-例：运放整个设计流程
+###### 例：==运放整个设计流程==
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828145140680.png" alt="image-20230828145140680" style="zoom:50%;" />
 
+> 1，总电流 = 总功耗 / 供电电压；随后将电流进行分配，分配给每个支路（需要经验）
+>
+> 2，根据输出摆幅分配V~OD~，题中V~OD9~设为0.5V，原因是M~9~是尾电流管，需要流过的电流较大，通过增大V~OD~可以增大流过其中的电流（否则只能通过增大宽长比的方式，但增大宽长比后会花费更多的面积）（需要经验）
+
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828145310882.png" alt="image-20230828145310882" style="zoom:50%;" />
 
+> 3，每个管子的过驱动电压V~OD~和电流I~D~均已知，可以直接计算出每个管子的宽长比；如何确定宽和长的具体值呢？原则是可以先将管子的长L设为工艺的最小值（减小管子的尺寸，同时管子的寄生电容也越小，会使小信号带宽更大）
+
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828145520938.png" alt="image-20230828145520938" style="zoom:50%;" />
+
+> 4，计算增益，将结果与要求比较，进行相应的调整（不一定需要对所有的管子进行修改，找到短板进行相应的修改即可）
 
 - 单位增益共源共栅
 
@@ -1443,9 +1473,9 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828183504960.png" alt="image-20230828183504960" style="zoom: 33%;" /><img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828183528767.png" alt="image-20230828183528767" style="zoom:33%;" />
 
-> 折叠：将输入MOS管的类型变换一下，类型转换之后没有了对地的通路，此时需要添加一个电流源。
+> ==折叠：将输入MOS管的类型变换一下，类型转换之后没有了对地的通路，此时需要添加一个电流源。==
 >
-> 优点：将输入V~in~和输出V~out~隔离开，解决共源共栅由于输入输出相互限制导致输出摆幅太小的问题。
+> ==优点：将输入V~in~和输出V~out~隔离开，解决共源共栅由于输入输出相互限制导致输出摆幅太小的问题。==
 
 - 差动折叠cascode OTA
 
@@ -1493,6 +1523,8 @@
 
 ​		注：电路中的r~o1~是一个共源极MOS管的小信号等效。
 
+> 其中M~2~和r~o1~两者构成一个负反馈，得到共源共栅的高增益，在X点接入一个运放相当于在共源共栅的反馈环路中增加一个放大单元，使得闭环路增益更大
+
 ​		环路增益：其中M~2~管和r~o1~构成的共源共栅等效于一个源极跟随器增益≈ 1，故整体电路的环路增益<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828204537625.png" alt="image-20230828204537625" style="zoom:50%;" />
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828204606352.png" alt="image-20230828204606352" style="zoom:50%;" /> ，由于A~1~ 远大于1，故<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828204724866.png" alt="image-20230828204724866" style="zoom:50%;" />
@@ -1505,7 +1537,11 @@
 >
 > 电路二：此结构中的电流大小由偏置管中的电流I~D~决定，M~2~与M~1~共同构成放大器
 
- <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828212543669.png" alt="image-20230828212543669" style="zoom:50%;" />
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231005101534390.png" alt="image-20231005101534390" style="zoom:50%;" />
+
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230828212543669.png" alt="image-20230828212543669" style="zoom:50%;" />
+
+> 将左图中的r~o1~使用M~1~替换，与M~2~构成共源共栅，由于M~2~与A~1~一起后的等效电阻远远小于M~1~的输出电阻r~o1~，故V~in~输入后的电流几乎全部向上流过M~2~管，故右边的电路就是一个以M~~2~和A~1~共同构成的负载的共源极放大电路。
 
 实际电路实现上述“超级晶体管”：
 
@@ -1513,7 +1549,7 @@
 
 ​		注：可见增益确实增大了，但输出范围减小了（V~X~ = V~OD~ 时不影响输出摆幅）。
 
-​		可以使用PMOS管来增大输出摆幅：
+​		可以使用PMOS管来增大输出摆幅（增大增益，并且不影响输出摆幅）：
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230829160151926.png" alt="image-20230829160151926" style="zoom:50%;" />
 
@@ -1531,6 +1567,12 @@
 
 - 全差动运放的优缺点：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830092605125.png" alt="image-20230830092605125" style="zoom: 50%;" />
 
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231005110345934.png" alt="image-20231005110345934" style="zoom:50%;" />
+>
+> 单端输出的共模电平是固定的<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231005110429889.png" alt="image-20231005110429889" style="zoom:50%;" />
+>
+> 全差动中由于上面两个管子的源极和栅极都接直流电源，故等效为电流源，在工作的时候会与尾电流源产生冲突，导致输出的共模电平无法确定
+
 其中对于差动放大器的共模电平的问题，**只有“一山不容二虎”的情况（电路中有两个电流源导致电流冲突，如负载是电流源）下才会需要共模电平和共模反馈**。
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830094225626.png" alt="image-20230830094225626" style="zoom:50%;" />
@@ -1538,6 +1580,8 @@
 注：差动放大器中的共模是指当输入信号还没有加入差动值，只加了一个共模电平，输出端如何获得一个确定的共模电压。当电路中存在电流冲突时，输出端的共模电压会不稳。
 
 - 通过共模反馈将共模电平固定下来：
+
+> 由于是两个电流源的冲突导致"一山不容二虎"的情况，故共模反馈的核心思想就是将其中的“一只虎”变弱
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830102206142.png" alt="image-20230830102206142" style="zoom:50%;" />
 
@@ -1603,7 +1647,7 @@
 
 ​		注：
 
-1. 相位延迟 = <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830212555261.png" alt="image-20230830212555261" style="zoom: 33%;" />
+1. 相位延迟 = <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230830212555261.png" alt="image-20230830212555261" style="zoom: 33%;" />，ΔT是器件延迟，是固定的，但随着信号的频率的增大，ΔT相对于信号周期所占的比重越来越大，即相位延迟越来越大。
 
 2. 并不是只要不输入某个会导致正反馈频率的信号就不会产生正反馈，当运放供电时（输入信号相当于一个方波，含有丰富的各次谐波），输入信号的波动，噪声等因素都可能会产生振荡，导致正反馈。
 
@@ -1619,9 +1663,11 @@
 
 ​		稳定系统和不稳定系统：
 
-​		根据环路增益的波特图判断
+​		根据==环路增益的波特图判断==
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831082550229.png" alt="image-20230831082550229" style="zoom:50%;" />
+
+> 其中GX（增益交点）是指==环路增益==为0dB（即单位增益）的点；PX（相位交点）是指相位为 -180° 的点
 
 ​		闭环系统的极点与系统稳定性：收敛域包含虚轴（即闭环系统函数的根在虚轴左侧）
 
@@ -1636,9 +1682,12 @@
 结论：
 
 1. 对于多极点系统，采用闭环增益的波特图分析，寻找GX点和PX点进行比较。
-2. 系统的β越小，系统越稳定，最坏的情况（β最大）β = 1
+2. 系统的反馈越弱，即β越小，系统越稳定（幅度波特图中的灰色线条，此时GX变小，离PX越来越远），最坏的情况（β最大）β = 1（即单位增益反馈）
+2. 没有零点的两极点系统总是稳定的
 
 ### 10.3 相位裕度
+
+​		相位裕度（PM）是指GX的点所对应的相位值和PX之间的相位差。
 
 例：<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831090058775.png" alt="image-20230831090058775" style="zoom:50%;" />
 
@@ -1659,6 +1708,12 @@
 > 对于一个两极点系统：
 >
 > <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831093055138.png" alt="image-20230831093055138" style="zoom:50%;" />
+
+> <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231005210622475.png" alt="image-20231005210622475" style="zoom:50%;" />
+>
+> 其中*ω*~1~是系统的主极点（一般是系统的输出极点），*ω*~u~是单位增益点（*ω*~u~ = g~m~ / C~L~），*ω*~2~是寄生极点（由系统的寄生电容产生）；在设计运放时，一般先确定*ω*~u~，为了保证系统的稳定，需要将*ω*~2~的值设置为*ω*~u~的2~3倍（此时相位裕度为63度至72度之间）
+>
+> 故对于一个两极点系统，稳定与否主要取决于*ω*~2~的极点，所以最主要的工作是设计*ω*~2~的值（寄生极点的调整需要经验）
 
 ### 10.4 频率补偿
 
@@ -1686,17 +1741,17 @@
 
 ​                   <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831141307755.png" alt="image-20230831141307755" style="zoom:50%;" />                 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831141340460.png" alt="image-20230831141340460" style="zoom:50%;" />
 
-​		注：主频率极点在输出端（输出端的输出电阻最大）；A极点关联的MOS管最多，故寄生电容最大，故选为次极点。
+​		注：主频率极点在输出端（输出端的输出电阻最大）；A极点关联的MOS管最多（3管，5管，6管），故寄生电容最大，故选为次极点。
 
-​		多个极点在GX左侧，系统不稳定，需要进行频率补偿：移动主极点频率实现<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831142327644.png" alt="image-20230831142327644" style="zoom:50%;" />
+​		**多个极点在GX左侧，系统不稳定，需要进行频率补偿：移动主极点频率实现**<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831142327644.png" alt="image-20230831142327644" style="zoom:50%;" />
 
-​		通过增大输出电容C~L~来移动主极点频率，主要依据：波特图中一个极点的斜率为 -20dB/dec。
+​		==通过增大输出电容C~L~来移动主极点频率，主要依据：波特图中一个极点的斜率为 -20dB/dec。==
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831142916180.png" alt="image-20230831142916180" style="zoom:50%;" />
 
 ​		**先找到次极点的频率，再通过 -20dB/dec的斜率反推出移动后的主极点频率值*ω*~out~'，通过计算得到C~L~’的值。**
 
-> ==如何计算相位裕度：==
+> ==如何根据波特图计算相位裕度：==
 >
 > <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230831145330269.png" alt="image-20230831145330269" style="zoom: 33%;" />
 >
@@ -1750,7 +1805,7 @@
 >
 > 对于一级运放，随着负载电容的不断增大，输出会越来越稳定，但响应时间会越来越长；对于两级运放，随着负载电容的不断增大，输出会越来越不稳定，可能会产生振荡（由于第二级运放的输出结点频率是次极点，随着负载电容不断增大，次极点频率会减小，与主极点频率接近）
 
-==总结：两级运放的设计过程==
+###### ==总结：两级运放的设计过程==
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230901104917364.png" alt="image-20230901104917364" style="zoom:50%;" />
 
