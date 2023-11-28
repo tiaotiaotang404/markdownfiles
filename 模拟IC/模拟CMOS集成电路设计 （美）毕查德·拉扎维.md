@@ -224,6 +224,10 @@
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230730111126083.png" alt="image-20230730111126083" style="zoom:33%;" />
 
+> ![image-20231120205705567](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231120205705567.png)
+>
+> ①管源级电压高于栅极电压，MOS管才导通，②源级电压高于漏极电压，③电流从源级流向漏极。
+
 ### 2.5 SPICE模型
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20230801085344954.png" alt="image-20230801085344954" style="zoom:50%;" />
@@ -1476,6 +1480,12 @@
 > ==折叠：将输入MOS管的类型变换一下，类型转换之后没有了对地的通路，此时需要添加一个电流源。==
 >
 > ==优点：将输入V~in~和输出V~out~隔离开，解决共源共栅由于输入输出相互限制导致输出摆幅太小的问题。==
+>
+> [4. 折叠cascode运算放大器-CSDN博客](https://blog.csdn.net/qq_41424881/article/details/132890037)
+>
+> ![image-20231120193421376](C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231120193421376.png)
+>
+> 折叠结构中晶体管M1和M2获得相当的性能，就要满足I2=|ID1|+|ID2|。所以折叠结构的代价就是增加了功耗。
 
 - 差动折叠cascode OTA
 
