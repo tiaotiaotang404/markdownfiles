@@ -444,7 +444,7 @@
 
 ​		相位裕度，GX的相位与PX相位（-180°）的差。
 
-<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231024095128999.png" alt="image-20231024095128999" style="zoom:67%;" />
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231024095128999.png" alt="image-20231024095128999" style="zoom: 80%;" />
 
 ​		其中A点处引入的一对极零点对，寄生电容引入的零点位于它引入的极点的二倍处，且该零点为负零点，可以很大程度上补偿自身引入的极点，因此我们认为这一极零点对频率响应影响较小。
 
@@ -458,7 +458,7 @@
 
 - ==零极点计算==
 
-<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231026103629266.png" alt="image-20231026103629266" style="zoom:50%;" />
+<img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231026103629266.png" alt="image-20231026103629266" style="zoom: 80%;" />
 
 <img src="C:\Users\张云鑫\AppData\Roaming\Typora\typora-user-images\image-20231026103657407.png" alt="image-20231026103657407" style="zoom:67%;" />
 
